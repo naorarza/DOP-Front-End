@@ -1,0 +1,16 @@
+.ant-pagination {
+  color: black;
+  background-color: white;
+  background: white;
+}
+
+:where(.css-dev-only-do-not-override-htwhyh).ant-table-wrapper
+  .ant-table-pagination.ant-pagination {
+  margin: 0 0;
+  padding: 12px;
+}
+@media screen and (max-width: 570px) {
+  .dissapear {
+    display: none;
+  }
+}

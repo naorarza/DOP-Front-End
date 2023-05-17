@@ -1,0 +1,15 @@
+.catParent{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    color: white;
+    min-height: 100px;
+    background-color: #333333;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 350px;
+    height: 200px;
+    padding: 8px;
+    border-radius: 8px;
+}

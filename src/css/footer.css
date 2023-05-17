@@ -1,0 +1,32 @@
+/* footer css */
+
+
+.footerDiv {
+    height: 100px;
+}
+
+.footerNav{
+    width: 130px;
+    font-size: 12px;
+}
+
+.footerNav p{
+    width: 50%;
+    margin-bottom: 4px;
+}
+
+.iconFooter {
+    /* height: 50px; */
+    transition: 0.4s ease-in-out;
+}
+
+.iconFooter:hover {
+    transform: scale(1.2)translateY(-7px);
+}
+
+@media screen and (max-width:768px) {
+    .footerIconDad {
+        display: flex;
+        flex-direction: column;
+    }
+}
