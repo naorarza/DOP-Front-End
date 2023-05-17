@@ -1,0 +1,70 @@
+/* .ant-upload {
+  margin: 0;
+  padding: 0;
+}
+
+span.ant-upload-list-item-actions,
+.anticon.anticon-picture,
+span,
+.anticon.anticon-close.ant-modal-close-icon,
+.ant-modal-close-x {
+  margin-right: 0px;
+}
+
+
+
+span {
+  margin-right: 0px;
+} */
+.anticon.anticon-close.ant-modal-close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ant-modal-footer,
+.ant-upload-list.ant-upload-list-picture-card,
+.ant-modal-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.ant-modal-title {
+  padding: 8px;
+}
+
+.ant-modal-content {
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+#my-avatar {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid grey;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+#restoreBtn{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: red;
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

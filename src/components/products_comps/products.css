@@ -1,0 +1,54 @@
+/* .check{
+    background: #3b3f3f;
+}
+
+.productBox{
+    background: rgba(44, 102, 160, 0.068);
+    color:white;
+    border: 3px solid black;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    
+    overflow: hidden;
+} */
+
+.parent{
+    width: 300px;
+    height: 100px;
+}
+
+.child{
+    border: 2px solid black;
+    color: white;
+    min-height: 400px;
+    flex-basis: auto;
+    background-color: #333333;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width:576px){
+
+    .imageHolder{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .textHolder{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .productImage{
+        width: 250px;       
+        float: none;
+    }
+}
+
+
