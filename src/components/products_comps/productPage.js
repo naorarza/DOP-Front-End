@@ -38,7 +38,7 @@ export default function ProductPage() {
           className="text-dark d-flex justify-content-center align-items-center"
         >
           <div
-            className="m-3 rounded-2 p-3"
+            className="m-3 rounded-2 p-3 container"
             style={{ background: "#eff", border: "3px solid grey" }}
           >
             <div className="d-flex d-flex flex-wrap">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./adminProduct.css";
 import { MAIN_ROUTE } from "../../constant/urls";
 import { doApiDelete } from "../../services/apiServices";
@@ -23,10 +23,38 @@ export default function ProductViewAdmin(props) {
   const product = props.item;
 
   const [open, setOpen] = useState(false);
+  const [newProduct, setNewProduct] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const checkIfNewProduct = () => {    
+    
+    if(!product.newProductDate) {
+      setNewProduct(false);
+      return;
+    }
+      // Get the date from the server
+      const serverDate = new Date(product.newProductDate); // Replace with the actual date received from the server
+      
+      // Get the current date
+      const currentDate = new Date();
+      
+      // Compare the dates
+      if (currentDate > serverDate) {
+         setNewProduct(false);
+        } else if (currentDate < serverDate) {
+          setNewProduct(true);
+        } else {
+          setNewProduct(true);
+      }
+  };
+  
+
+  useEffect(() => {
+    checkIfNewProduct();
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -42,8 +70,6 @@ export default function ProductViewAdmin(props) {
     setOpenDelete(false);
   };
 
-  
-  
   const deleteProduct = async () => {
     const url = MAIN_ROUTE + "products/" + props.item._id;
     try {
@@ -66,16 +92,18 @@ export default function ProductViewAdmin(props) {
   return (
     <>
       <AuthAdminComp />
-      
+
       <div className="parent">
         <img
-        style={{borderRadius:'8px'}}
+          style={{ borderRadius: "8px" }}
           className="productImg"
           src={product.img_url}
           alt={product.product_name}
           width={"100%"}
           height={"200px"}
         />
+        {/* <h2 style={{color:'red'}}>New</h2> */}
+        {newProduct && <h2 className="text-center" style={{ color: "red" }}>חדש</h2>}
         <p className="me-2">שם המוצר: {product.product_name}</p>
         {/* <p className="me-2">כמות זמינה: {product.amount_product}</p> */}
         {/* <p className="ms-2">האם נמצא בתפריט: {product.inMenu}</p> */}
@@ -105,8 +133,19 @@ export default function ProductViewAdmin(props) {
               {"האם אתה בטוח שברצונך למחוק מוצר זה?"}
             </DialogTitle>
             <DialogActions>
-              <Button color="error" variant="outlined" onClick={handleCloseDelete}>ביטול</Button>
-              <Button color="primary" variant="contained" onClick={deleteProduct} autoFocus>
+              <Button
+                color="error"
+                variant="outlined"
+                onClick={handleCloseDelete}
+              >
+                ביטול
+              </Button>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={deleteProduct}
+                autoFocus
+              >
                 אישור
               </Button>
             </DialogActions>
@@ -123,10 +162,7 @@ export default function ProductViewAdmin(props) {
           </Tooltip>
           <Dialog open={open} onClose={handleClose}>
             <DialogActions className="d-flex justify-content-start">
-              <IconButton
-                aria-label="Close"
-                onClick={handleClose}
-              >
+              <IconButton aria-label="Close" onClick={handleClose}>
                 <CloseIcon />
               </IconButton>
             </DialogActions>

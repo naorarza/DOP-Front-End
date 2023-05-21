@@ -1,6 +1,53 @@
-#mainDiv{
-    background-image: url(images/wllpaper.jpg);
+#mainDiv {
+    /* background-image: url(images/wllpaper.jpg);
     background-position: center;
-    background-size: contain;
+    background-size: contain; */
+    background: rgb(49, 49, 49);
     color: white;
+}
+
+#image1 {
+    background-image: url(./images/image1.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 93vh;
+}
+
+#image2 {
+    background-image: url(./images/image2.jpg);
+    background-position: center;
+    background-size: cover;
+
+    min-height: 500px;  
+    /* width: 85%; */
+    margin-inline: auto;
+
+    font-size: 1.2em;
+    /* text-shadow: 2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black, 2px 0px 0 black, 0px 2px 0 black, -2px 0px 0 black, 0px -2px 0 black; */
+}
+
+.phone{
+    display: none;
+}
+
+#image2 a {
+    transition: 0.5s ease-in-out;
+    text-shadow: none;
+    color: white;
+}
+
+#image2 a:hover {
+    color: aqua;
+}
+
+
+@media screen and (max-width:768px){
+    
+    .phone{
+        display: flex;
+    }
+    
+    .phoneText{
+        display: none;
+    }
 }
