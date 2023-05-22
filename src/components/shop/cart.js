@@ -60,7 +60,7 @@ export default function Cart() {
           </div>
           {user?.cart ? (
             <>
-              <div className="container border border-light mb-5 border-2 rounded-2 col-md-7 col-sm-7">
+              <div style={{ border:`2px solid ${theme === '#262b2f' ? 'white' : 'black'}`}} className="container rounded-2 mb-5col-md-7 col-sm-7">
                 {cartAr.map((item, i) => {
                   return (
                     <CartList
@@ -88,6 +88,7 @@ export default function Cart() {
                   variant="contained"
                   size="large"
                   color="success"
+                  onClick={()=>{nav('/payment')}}
                 >
                   לתשלום
                   <ShoppingCartCheckout className="me-5" />

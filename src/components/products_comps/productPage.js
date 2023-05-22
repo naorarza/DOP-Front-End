@@ -39,13 +39,13 @@ export default function ProductPage() {
         >
           <div
             className="m-3 rounded-2 p-3 container"
-            style={{ background: "#eff", border: "3px solid grey" }}
+            style={{ background: "#eff", border: "3px solid grey" , width:'600px' , minHeight:'300px'}}
           >
             <div className="d-flex d-flex flex-wrap">
               <div className="col-md-6 col-lg-6 col-sm-6 imageHolder">
                 <img
-                  style={{ borderRadius: "8px", border: "2px solid black" }}
-                  className="col-md-10 col-lg-8 col-sm-12 productImage"
+                  style={{maxWidth:'280px', maxHeight:'220px', minHeight:'220px', borderRadius: "8px", border: "2px solid black" }}
+                  className="productImage"
                   src={product.img_url}
                   alt={product.product_name}
                 />
@@ -64,7 +64,7 @@ export default function ProductPage() {
                 </div>
               </div>
             </div>
-            <hr className="p-0 m-0" />
+            <hr className="p-0 mt-4 m-0" />
             <div className="p-3 fs-5">
               <p>מידע אודות המוצר: {product.info}</p>
             </div>

@@ -138,7 +138,7 @@ export default function Navbar({ sidebar, setSidebar }) {
               ) : (
                 <></>
               )}
-              <hr className="" />
+              <hr className="text-light" />
               {SidebarData.map((item, index) => {
                 return (
                   <li key={index} className={item.cName}>

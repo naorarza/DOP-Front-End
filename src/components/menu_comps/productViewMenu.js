@@ -15,30 +15,6 @@ export default function ProductViewMenu(props) {
   const nav = useNavigate();
   const [loading,setLoading] = useState(false);
 
-  const addToCart = async () => {
-    let url = MAIN_ROUTE + "users/cart/" + product._id;
-    try {
-      setLoading(true);
-      let data = await apiPut(url);
-      await updateProductAmount();
-      await refreshCart();
-      data.modifiedCount > 0 && toast.success("המוצר התווסף לעגלה!");
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      toast.error("משהו השתבש נסה שנית מאוחר יותר!");
-    }
-  };
-
-  const updateProductAmount = async () => {
-    let url = MAIN_ROUTE + "users/productNum/up";
-    try {
-      const data = await apiPut(url);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
       <img
@@ -73,9 +49,6 @@ export default function ProductViewMenu(props) {
         </Tooltip>
       </p>
       <p className="me-2">מחיר: {product.product_price}₪</p>
-      <Button onClick={addToCart} color="info" variant="contained">
-      {!loading ? <>הוסף לעגלה <AddShoppingCartSharp className="me-3" /> </> : <p className="w-100 p-2 m-0"><LinearProgress color="secondary"/></p>}
-      </Button>
     </>
   );
 }
