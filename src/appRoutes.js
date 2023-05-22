@@ -30,6 +30,8 @@ import CategoriesList from "./admin/categories_comps/categoriesList";
 import AddCategorieForm from "./admin/categories_comps/addCategorieForm";
 import ProductPage from "./components/products_comps/productPage";
 import Settings from "./components/navBar/settings";
+import SignUpGoogle from "./components/signup_comps/signUpGoogle";
+import PaymentPage from "./components/shop/paymentPage";
 
 export default function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -62,8 +64,10 @@ export default function AppRoutes() {
           <Route path="/events" element={<Events />} />
           <Route path="/login" element={<Login setLogged={setLogged} />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/google" element={<SignUpGoogle />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/profile/settings" element={<Settings />} />
           {/* block reqular user from entering admin pages */}

@@ -34,6 +34,24 @@ const apiPost = async (url, body) => {
     throw err;
   }
 };
+
+const apiPostGoogle = async (url, body) => {
+  try {
+    let { data } = await axios({
+      method: "POST",
+      url,
+      data: body,
+      headers: {
+        "x-api-key": localStorage[API_KEY],
+      },
+    });
+    return data;
+  } catch (err) {
+    toast.info(err.response.data.msg);
+    throw err;
+  }
+};
+
 const apiPut = async (url, body = {}) => {
   try {
     let { data } = await axios({
@@ -82,4 +100,4 @@ const doApiDelete = async(_url) => {
 
 
 
-export { apiGet, apiPost, apiPut, doApiDelete };
+export { apiGet, apiPost, apiPut, doApiDelete , apiPostGoogle };

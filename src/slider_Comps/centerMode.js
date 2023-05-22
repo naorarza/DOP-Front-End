@@ -92,7 +92,7 @@ export const CenterMode = () => {
       <Slider {...settings}>
         {filteredAr.map((item) => {
           return (
-            <div className="text-center me-2 slide-item">
+            <div key={item._id  } className="text-center me-2 slide-item">
               <div className='slide-inner'>
                 <img src={item.img_url} alt="" />
                 {/* <div className="none"> */}

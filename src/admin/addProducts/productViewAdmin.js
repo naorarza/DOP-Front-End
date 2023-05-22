@@ -23,38 +23,13 @@ export default function ProductViewAdmin(props) {
   const product = props.item;
 
   const [open, setOpen] = useState(false);
-  const [newProduct, setNewProduct] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const checkIfNewProduct = () => {    
-    
-    if(!product.newProductDate) {
-      setNewProduct(false);
-      return;
-    }
-      // Get the date from the server
-      const serverDate = new Date(product.newProductDate); // Replace with the actual date received from the server
-      
-      // Get the current date
-      const currentDate = new Date();
-      
-      // Compare the dates
-      if (currentDate > serverDate) {
-         setNewProduct(false);
-        } else if (currentDate < serverDate) {
-          setNewProduct(true);
-        } else {
-          setNewProduct(true);
-      }
-  };
-  
 
-  useEffect(() => {
-    checkIfNewProduct();
-  }, []);
+
 
   const handleClose = () => {
     setOpen(false);
@@ -103,7 +78,6 @@ export default function ProductViewAdmin(props) {
           height={"200px"}
         />
         {/* <h2 style={{color:'red'}}>New</h2> */}
-        {newProduct && <h2 className="text-center" style={{ color: "red" }}>חדש</h2>}
         <p className="me-2">שם המוצר: {product.product_name}</p>
         {/* <p className="me-2">כמות זמינה: {product.amount_product}</p> */}
         {/* <p className="ms-2">האם נמצא בתפריט: {product.inMenu}</p> */}
