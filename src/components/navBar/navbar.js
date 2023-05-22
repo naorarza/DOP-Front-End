@@ -152,7 +152,7 @@ export default function Navbar({ sidebar, setSidebar }) {
               {user ? <Signout /> : <Login />}
               {isAdmin && user ? (
                 <>
-                  <hr className="" />
+                  <hr className="text-light" />
                   {AdminSide.map((item, index) => {
                     return (
                       <li key={index} className={item.cName}>

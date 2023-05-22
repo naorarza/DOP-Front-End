@@ -1,31 +1,42 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { apiGet, apiPost } from "../../services/apiServices";
+import { apiPost } from "../../services/apiServices";
 import { MAIN_ROUTE } from "../../constant/urls";
-import { useEffect } from "react";
-import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { Box, Button, CircularProgress } from "@mui/material";
-import "./cart.css";
 import { Checkbox } from "antd";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./cart.css";
 
 export default function PaymentPage() {
-  const { theme, text, cartPrice , mutate , refreshCart , productsInCart } = useContext(AuthContext);
+  const { theme, text, cartPrice, mutate, refreshCart, productsInCart } =
+    useContext(AuthContext);
   const [isPresent, setIsPresent] = useState(false);
-  const [bodyDataSave, setBodyDataSave] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [sendingData, setSendingData] = useState({'isPresent':isPresent, 'order_price':cartPrice});
+  const [acceptedPayment, setAcceptedPayment] = useState(false);
   const nav = useNavigate();
+
+  const onAcceptPaypal = (details) => {
+    toast.success(
+      "הרכישה בוצעה בהצלחה על ידי: " + details.payer.name.given_name
+    );
+    setAcceptedPayment(true);
+  };
 
   const onChange = (e) => {
     setIsPresent(e.target.checked);
     if (productsInCart < 1) {
-        nav("/");
-        toast.info("העגלה ריקה, עליך לבחור לפחות פריט אחד על מנת לגשת אליה");
-      }
+      nav("/");
+      toast.info("העגלה ריקה, עליך לבחור לפחות פריט אחד על מנת לגשת אליה");
+    }
   };
+
+  useEffect(() => {
+    acceptedPayment && doApiPostOrder();
+  }, [acceptedPayment]);
 
   const {
     register,
@@ -34,25 +45,30 @@ export default function PaymentPage() {
   } = useForm();
 
   const onSubForm = (_bodyData) => {
-    _bodyData.isPresent = isPresent;
-    _bodyData.order_price = Number(cartPrice);
-    setBodyDataSave(_bodyData);
-    doApiPostOrder(_bodyData)
-    // console.log(_bodyData);
+    setLoading(true);
+    console.log(_bodyData);
+
+    if (_bodyData) {
+      _bodyData.isPresent = isPresent;
+      _bodyData.order_price = Number(cartPrice);
+      setSendingData(_bodyData);
+    }
   };
 
   useEffect(() => {
-    console.log(bodyDataSave);
-  }, [bodyDataSave]);
+    console.log(sendingData);
+    if (sendingData !== null) {
+      console.log(sendingData);
+      setLoading(false);
+    }
+  }, [sendingData]);
 
-  const doApiPostOrder = async (_bodyData) => {
+  const doApiPostOrder = async () => {
     const url = MAIN_ROUTE + "orders";
-    console.log(bodyDataSave);
-    const data = await apiPost(url, _bodyData);
-    refreshCart();
+    const data = await apiPost(url, sendingData);
+    await refreshCart();
     mutate();
     nav('/')
-    console.log(data);
   };
 
   return (
@@ -82,6 +98,7 @@ export default function PaymentPage() {
           onSubmit={handleSubmit(onSubForm)}
           id="id_form"
         >
+          {loading && <h2>loading...</h2>}
           <h3>טופס למשלוח במידה וזה לא לכתובת ששמורה בפרופיל שלך</h3>
           <p>* אם הכתובת בפרופיל שלך היא הכתובת הרצויה נא לא למלא כלום *</p>
           <label>עיר</label>
@@ -138,7 +155,7 @@ export default function PaymentPage() {
         </form>
       </div>
       <div className="text-center d-flex pt-5 flex-column justify-content-center align-items-center">
-        {Number(cartPrice) > 1.5 ? (
+        {loading || Number(cartPrice) > 1.5 ? (
           <PayPalScriptProvider
             options={{
               "client-id":
@@ -147,9 +164,6 @@ export default function PaymentPage() {
             style={{ width: "250px" }}
           >
             <PayPalButtons
-              onClick={() => {
-                console.log(cartPrice);
-              }}
               createOrder={(data, actions) => {
                 return actions.order.create({
                   purchase_units: [
@@ -163,10 +177,7 @@ export default function PaymentPage() {
               }}
               onApprove={(data, actions) => {
                 return actions.order.capture().then(function (details) {
-                  toast.success(
-                    "הרכישה בוצעה בהצלחה על ידי: " + details.payer.name.given_name
-                  );
-                  doApiPostOrder({'isPresent':isPresent , 'order_price':cartPrice});
+                  onAcceptPaypal(details);
                 });
               }}
               style={{ color: "blue", label: "checkout" }}
