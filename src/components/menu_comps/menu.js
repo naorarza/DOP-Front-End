@@ -44,7 +44,7 @@ export default function Menu() {
       className="check container-fluid"
     >
       <h2 className="text-center display-4">תפריט</h2>
-      <div className="d-flex justify-content-around">
+      <div className="d-flex gap-2 flex-wrap justify-content-around">
         <SearchProduct onSearch={handleSearch} />
         <SortByOptionMenu setFilteredProducts={setFilteredProducts} ar={ar} />
       </div>

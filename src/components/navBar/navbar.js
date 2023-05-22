@@ -28,10 +28,12 @@ export default function Navbar({ sidebar, setSidebar }) {
   }, [sidebar]);
 
   const lockScroll = () => {
-    if (sidebar) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflowY = "auto";
+    if (!isAdmin) {
+      if (sidebar) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflowY = "auto";
+      }
     }
   };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Button } from "@mui/material";
@@ -8,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import UploadImage from "./uploadImage";
 import "./upload.css";
+import ConnectGoogle from "./connectGoogle";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GOOGLE_CLIENT_ID } from "../../constant/urls";
 
 export default function DataBox() {
   // cart
@@ -31,7 +33,7 @@ export default function DataBox() {
   return (
     <>
       {user?.name && (
-        <div className="p-5 border rounded-3 border-info border-2 col-md-8 col-sm-8">
+        <div style={{'minWidth': '70%'}} className="border p-3 rounded-3 border-info border-2">
           <h2 className="text-center display-4">מידע משתמש</h2>
           <div className="d-flex flex-column justify-content-center text-center align-items-center gap-3">
             {!changing ? (
@@ -45,6 +47,14 @@ export default function DataBox() {
             )}
             <UploadImage setChanging={setChanging} />
           </div>
+      {!user.googleSub && 
+              <div className="d-flex flex-column align-items-start justify-content-start">
+              <p>קישור חשבון הגוגל שלך:</p>
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+                <ConnectGoogle/>
+              </GoogleOAuthProvider>
+              </div>
+      }
           <hr />
           {isAdmin && (
             <>

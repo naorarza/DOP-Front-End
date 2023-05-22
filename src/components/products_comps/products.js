@@ -47,7 +47,7 @@ export default function Products() {
       className="check container-fluid"
     >
       <h2 className="text-center display-4">מוצרים</h2>
-      <div className="d-flex justify-content-around">
+      <div className="d-flex flex-wrap gap-2 justify-content-around">
         <SearchProduct onSearch={handleSearch} />
         <SortByOptionUsers setFilteredProducts={setFilteredProducts} ar={ar} />
       </div>

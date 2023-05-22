@@ -57,7 +57,7 @@ export default function SortByOptionMenu(props) {
 
   return (
     <div className="d-flex">
-    <Box sx={{ minWidth: 150 }}>
+    <Box sx={{ minWidth: 130 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">מיון</InputLabel>
         <Select

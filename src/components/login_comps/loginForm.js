@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ForgotPassword from "../forgotpassword/forgotPassword";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Google from "./google";
+import { GOOGLE_CLIENT_ID } from "../../constant/urls";
 
 export default function LoginForm(props) {
   // const handleClickOpen = props.handleClickOpen;
@@ -67,7 +68,7 @@ export default function LoginForm(props) {
         </div>
 
           <div className="d-flex mb-4 align-items-center justify-content-center">
-        <GoogleOAuthProvider clientId="955397316061-b8dsfg2guvtfvnncavjnan8ul6cef8hc.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           <Google />
         </GoogleOAuthProvider>
         </div>
