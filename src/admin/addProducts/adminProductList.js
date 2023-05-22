@@ -61,7 +61,7 @@ export default function AdminProductList() {
     <div style={{ minHeight: "95vh", background: theme, color: text }}>
       <AuthAdminComp />
       <h2 className="text-center display-4">עריכת תפריט ומוצרים</h2>
-      <div className="d-flex justify-content-around">
+      <div className="d-flex  justify-content-around">
         <div className="d-flex align-items-center">
           <Link
             style={{ textDecoration: "none", marginLeft: "8px" }}
