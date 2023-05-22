@@ -65,7 +65,7 @@ export default function ProductViewAdmin(props) {
   };
 
   return (
-    <>
+    <div key={product._id}>
       <AuthAdminComp />
 
       <div className="parent">
@@ -152,6 +152,6 @@ export default function ProductViewAdmin(props) {
           {/* -------------------------------------------- */}
         </div>
       </div>
-    </>
+    </div>
   );
 }

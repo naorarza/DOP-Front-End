@@ -90,12 +90,13 @@ export default function AdminProductList() {
           {filteredProducts != null ? (
             filteredProducts.map((item, i) => {
               return (
+                <div key={item._id}>
                 <ProductViewAdmin
                   catAr={catAr}
-                  key={item._id}
                   item={item}
                   refresh={doApi}
                 />
+                </div>
               );
             })
           ) : (

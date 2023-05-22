@@ -152,14 +152,19 @@ export default function OrdersTableAnt({
     {
       title: "שם",
       dataIndex: "name",
-      className:'ps-3 pe-2',
+      className: "ps-3 pe-2",
       key: "name",
       ...getColumnSearchProps("name"),
       render: (name, _id) => (
         <>
           <Space key={_id} className="d-flex flex-wrap" size="middle">
             <p className="fs-6">{name}</p>
-              <EditDropDown fixedDate={fixedDate} doApiOrders={doApiOrders} item={_id} setAr={setOrdersAr} />
+            <EditDropDown
+              fixedDate={fixedDate}
+              doApiOrders={doApiOrders}
+              item={_id}
+              setAr={setOrdersAr}
+            />
           </Space>
         </>
       ),
@@ -167,7 +172,9 @@ export default function OrdersTableAnt({
     {
       title: "תאריך הזמנה",
       dataIndex: "order_date",
-      render: (order_date) => <p className="fs-6 p-0 m-0">{fixedDate(order_date)}</p>,
+      render: (order_date) => (
+        <p className="fs-6 p-0 m-0">{fixedDate(order_date)}</p>
+      ),
       className: "orderDate ps-3 pe-2",
       key: "order_date",
     },
@@ -187,7 +194,7 @@ export default function OrdersTableAnt({
       ...getColumnSearchProps("status"),
       title: "סטטוס הזמנה",
       dataIndex: "status",
-      className:'ps-3 pe-2',
+      className: "ps-3 pe-2",
       key: "status",
       // ...getColumnSearchProps('role'),
       render: (status) => {

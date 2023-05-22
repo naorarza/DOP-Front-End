@@ -19,6 +19,8 @@ const apiGet = async (url, body = {}) => {
   }
 }
 const apiPost = async (url, body) => {
+  console.log('consoleLogTest2: ' , body);
+
   try {
     let { data } = await axios({
       method: "POST",

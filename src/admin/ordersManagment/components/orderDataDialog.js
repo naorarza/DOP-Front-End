@@ -12,9 +12,9 @@ import ViewProduct from "./viewProduct";
 import { toast } from "react-toastify";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 
-export default function OrderDataDialog({fixedDate , item }) {
+export default function OrderDataDialog({ fixedDate, item }) {
   const [open, setOpen] = useState(false);
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,13 +23,7 @@ export default function OrderDataDialog({fixedDate , item }) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    
-  }, []);
-
- 
-
-  
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -42,27 +36,27 @@ export default function OrderDataDialog({fixedDate , item }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="text-center">
           <h2> פרטי ההזמנה של: {item.name}</h2>
+          <p>סכום הזמנה: {(item.order_price / 0.27402).toFixed(2)}₪</p>
           <hr className="p-0 m-0" />
         </DialogTitle>
         <DialogContent className="text-center justify-content-center d-flex flex-wrap">
-         <div className="col-12 lightboxInfo">
-          <p> מספר טלפון: {item.phone}</p>
-          <p>תאריך הזמנה: {fixedDate(item.order_date)}</p>
+          <div className="col-12 lightboxInfo">
+            <p> מספר טלפון: {item.phone}</p>
+            <p>תאריך הזמנה: {fixedDate(item.order_date)}</p>
           </div>
-                    {item.products_ar.map((product, i) => {
-                      return (
-                        <div
-                    key={i}
-                    className="border rounded-3 col-md-auto border-light border-1 m-2 p-2"
-                  >
-                        <div key={i}>
-                          <p>מוצר: {product.product_name}</p>
-                          <ViewProduct product={product} />
-                        </div>
-                        </div>
-                      );
-                    })}
- 
+          {item.products_ar.map((product, i) => {
+            return (
+              <div
+                key={i}
+                className="border rounded-3 col-md-auto border-light border-1 m-2 p-2"
+              >
+                <div key={i}>
+                  <p>מוצר: {product.product_name}</p>
+                  <ViewProduct product={product} />
+                </div>
+              </div>
+            );
+          })}
         </DialogContent>
         <DialogActions className="d-flex justify-content-center">
           <Button color="error" variant="outlined" onClick={handleClose}>

@@ -1,6 +1,7 @@
 import { API_KEY } from "./constants"
 
-const MAIN_ROUTE = "http://localhost:3002/"
+// const MAIN_ROUTE = "http://localhost:3002/"
+const MAIN_ROUTE = "https://drinkorderparty.cyclic.app/"
 
 const LOGIN_ROUTE = MAIN_ROUTE + "users/login"
 const SIGNUP_ROUTE = MAIN_ROUTE + "users/signup"
