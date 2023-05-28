@@ -1,5 +1,6 @@
 .slide-item{
     width: 100%;
+    border-radius: 8px;
     height: 400px;
     /* background-color: aqua; */
     transition: 0.5s ease-in-out;
@@ -41,9 +42,8 @@
 }
 
 .slick-center div .slide-item{
-    background-color: #ffffff96;
+    background-color: #3d3d3dbe;
     border-radius: 8px;
-    /* transform: scale(1.2); */
 }
 
 @media screen and (width < 888px) {

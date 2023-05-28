@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Products from "./components/products_comps/products";
-import Events from "./components/events";
 import SignUp from "./components/signup_comps/signUp";
 import Footer from "./components/footer";
 // import Gallery from './admin/components/gallery'
@@ -32,6 +31,7 @@ import ProductPage from "./components/products_comps/productPage";
 import Settings from "./components/navBar/settings";
 import SignUpGoogle from "./components/signup_comps/signUpGoogle";
 import PaymentPage from "./components/shop/paymentPage";
+import Events from "./components/events/events";
 
 export default function AppRoutes() {
   const { user } = useContext(AuthContext);

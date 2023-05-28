@@ -5,8 +5,13 @@ import { Button } from "@mui/material";
 import { MAIN_ROUTE } from "../constant/urls";
 import { apiGet } from "../services/apiServices";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 export const CenterMode = () => {
+
+  const { theme } = useContext(AuthContext);
+
   const settings = {
     className: "center",
     centerMode: true,
@@ -43,7 +48,7 @@ export const CenterMode = () => {
     ],
   };
 
-  const [ar,setAr] = useState([]);
+  const [ar, setAr] = useState([]);
 
   useEffect(() => {
     doApiGet();
@@ -83,23 +88,29 @@ export const CenterMode = () => {
   const filteredAr = ar.filter((product) => checkIfNewProduct(product));
   const nav = useNavigate();
 
-  
 
   return (
-    <div style={{ backgroundColor: "#31313131", padding: "32px" }}>
+    <div style={{ backgroundColor: "#31313131", padding: "32px"}}>
       <h2 className="text-center pb-2"> מוצרים חדשים</h2>
       <hr />
       <Slider {...settings}>
         {filteredAr.map((item) => {
           return (
-            <div key={item._id  } className="text-center me-2 slide-item">
-              <div className='slide-inner'>
+            <div key={item._id} className="text-center me-2 slide-item">
+              <div className="slide-inner">
                 <img src={item.img_url} alt="" />
                 {/* <div className="none"> */}
                 <p style={{ color: "#fff", margin: "0", padding: "0" }}>
                   {item.product_name}
                 </p>
-                <Button onClick={()=> {nav('/product/'+item._id)}} size="small" variant="contained" color="success">
+                <Button
+                  onClick={() => {
+                    nav("/product/" + item._id);
+                  }}
+                  size="small"
+                  variant="contained"
+                  color="success"
+                >
                   צפייה במוצר
                 </Button>
                 {/* </div> */}

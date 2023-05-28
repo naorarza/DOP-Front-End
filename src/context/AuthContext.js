@@ -93,7 +93,7 @@ const doApiGetValue = async () => {
     doApiGetValue();
   }, []);
 
-  const [theme, setTheme] = useState("#313131");
+  const [theme, setTheme] = useState("#262b2f");
   const [text, setText] = useState("#fff");
 
   const changeThemeColor = () => {

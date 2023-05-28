@@ -55,6 +55,7 @@ export default function CategoriesList() {
             ar.map((item) => {
               return (
                 <div className="catParent">
+                {/* style={{color:text,backgroundColor:theme}}  */}
                   <p className="me-2">שם הקטגוריה: {item.name}</p>
                   {/* <p className="ms-2">האם נמצא בתפריט: {product.inMenu}</p> */}
                   <Tooltip title={item.info}>

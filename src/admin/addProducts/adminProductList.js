@@ -82,7 +82,7 @@ export default function AdminProductList() {
       </div>
       <hr />
 
-      <div style={{ minHeight: "95vh" }} className="check container-fluid pb-3">
+      <div style={{ minHeight: "95vh" }} className="container-fluid pb-3">
         <div
           style={{ minHeight: "95vh" }}
           className="d-flex flex-wrap justify-content-center"

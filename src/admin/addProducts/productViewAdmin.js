@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./adminProduct.css";
 import { MAIN_ROUTE } from "../../constant/urls";
 import { doApiDelete } from "../../services/apiServices";
@@ -18,12 +18,13 @@ import AuthAdminComp from "../authAdminComp";
 import EditProductForm from "./editProductForm";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AuthContext from "../../context/AuthContext";
 
 export default function ProductViewAdmin(props) {
   const product = props.item;
 
   const [open, setOpen] = useState(false);
-
+  const { theme , text } = useContext(AuthContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -68,9 +69,9 @@ export default function ProductViewAdmin(props) {
     <div key={product._id}>
       <AuthAdminComp />
 
-      <div className="parent">
+      <div style={{border:`3px solid grey`, background:theme , color:text}} className="parent">
         <img
-          style={{ borderRadius: "8px" }}
+          style={{ borderRadius: "4px" }}
           className="productImg"
           src={product.img_url}
           alt={product.product_name}

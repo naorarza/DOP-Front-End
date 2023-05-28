@@ -1,14 +1,16 @@
 import { FilterAlt, SearchOutlined } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { Input, Select, Space, Table, Tag } from "antd";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useState } from "react";
 import "./userLists.css";
 import EditDropDown from "./editDropDown";
+import AuthContext from "../../../context/AuthContext";
 
 export default function UserTableAnt({ doApi, ar, setAr, fixedDate, numRole }) {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
+  const {text,theme} = useContext(AuthContext);
   const searchInput = useRef(null);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
