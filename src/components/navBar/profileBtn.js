@@ -38,7 +38,8 @@ export default function ProfileBtn() {
             <AccountBoxOutlined
               className="ms-5"
               fontSize="large"
-              color="action"
+              // color="action"
+              style={{color:'#fff'}}
             />
           </Link>
         </Tooltip>

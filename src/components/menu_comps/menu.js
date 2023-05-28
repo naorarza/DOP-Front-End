@@ -41,7 +41,7 @@ export default function Menu() {
   return (
     <div
       style={{ minHeight: "95vh", background: theme, color: text }}
-      className="check container-fluid"
+      className="container-fluid"
     >
       <h2 className="text-center display-4">תפריט</h2>
       <div className="d-flex gap-2 flex-wrap justify-content-around">
@@ -53,7 +53,7 @@ export default function Menu() {
         {filteredProducts != null ? (
           filteredProducts.map((item, i) => {
             return (
-              <div className="parent">
+              <div style={{border:`3px solid grey`, background:theme , color:text}} className="parent">
                 <ProductViewMenu key={i} item={item} />
               </div>
             );

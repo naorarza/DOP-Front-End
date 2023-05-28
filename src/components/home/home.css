@@ -33,7 +33,7 @@
 #image2 a {
     transition: 0.5s ease-in-out;
     text-shadow: none;
-    color: white;
+    color: black;
 }
 
 #image2 a:hover {

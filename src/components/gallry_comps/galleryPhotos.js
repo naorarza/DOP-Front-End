@@ -10,7 +10,7 @@ export default function GalleryPhotos(props) {
     <div className="text-center">
       <div className="col-12 position-relative">
         <img
-          className="rounded-3"
+          className="rounded-3 border border-2"
           width="200px"
           height="200px"
           src={item.largeImageURL}

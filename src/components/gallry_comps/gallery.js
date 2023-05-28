@@ -1,19 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import AuthAdminComp from "../../admin/authAdminComp";
+import { AudioOutlined } from "@ant-design/icons";
 import GalleryPhotos from "./galleryPhotos";
 import { TextField } from "@mui/material";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import { Space } from "antd";
+import Search from "antd/es/transfer/search";
 
 export default function Gallery() {
   const [ar, setAr] = useState();
   const [searchQ, setSearchQ] = useState("pub");
-  const { theme , text } = useContext(AuthContext);
+  const { theme, text } = useContext(AuthContext);
 
   useEffect(() => {
     doApi();
   }, [searchQ]);
+
+  const suffix = (
+    <AudioOutlined
+      style={{
+        fontSize: 16,
+        color: "#1677ff",
+      }}
+    />
+  );
 
   const doApi = async () => {
     searchQ === "" && setSearchQ("pub");
@@ -63,9 +74,7 @@ export default function Gallery() {
 
   return (
     <>
-      <div
-        style={{ minHeight: "95vh", background: theme, color: text }}
-      >
+      <div style={{ minHeight: "95vh", background: theme, color: text }}>
         {/* <Link id="uploadImage" to="/admin/gallery/uploadImage">
           <AddAPhotoIcon
             id="uploadImageIcon"
@@ -76,14 +85,14 @@ export default function Gallery() {
           <div className="container">
             <h2 className="text-center display-3">גלריה</h2>
             <div className="container d-flex align-items-center">
-            <TextField
-            style={{marginRight:'10%'}}
-              id="demo-helper-text-misaligned"
-              helperText="חפש תמונה"
-              type="text"
-              label="חיפוש"
-              onChange={translate}
-            />
+                <TextField
+                  style={{ marginRight: "10%" }}
+                  id="demo-helper-text-misaligned"
+                  helperText="חפש תמונה"
+                  type="text"
+                  label="חיפוש"
+                  onChange={translate}
+                />
             </div>
             <hr />
             <div className="d-flex gap-5 p-5 flex-wrap justify-content-center ">

@@ -47,7 +47,7 @@ export default function ProductView(props) {
         onClick={() => {
           nav("/product/" + product._id);
         }}
-        style={{ borderRadius: "8px", cursor: "pointer" }}
+        style={{ borderRadius: "4px", cursor: "pointer" }}
         className="productImg"
         src={product.img_url}
         alt={product.product_name}

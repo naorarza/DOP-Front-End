@@ -27,7 +27,8 @@ export default function CartShow() {
                 <ShoppingCartCheckout
                   className="ms-5"
                   fontSize="large"
-                  color="action"
+                  // color="action"
+                  style={{color:'#fff'}}
                 />
               </>
             )}

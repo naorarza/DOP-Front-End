@@ -8,10 +8,10 @@ import { CenterMode } from "../../slider_Comps/centerMode";
 
 export default function Home() {
   const nav = useNavigate();
-
+  const { text , theme } = useContext(AuthContext);
   return (
     <>
-      <div id="mainDiv" style={{ minHeight: "95vh" }}>
+      <div id="mainDiv" style={{background:theme , color:text , minHeight: "95vh" }}>
         <div id="image1"></div>
         <CenterMode />
         <div

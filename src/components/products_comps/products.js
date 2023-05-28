@@ -56,7 +56,7 @@ export default function Products() {
         {filteredProducts != null ? (
           filteredProducts.map((item, i) => {
             return (
-              <div className="parent">
+              <div style={{border:`3px solid grey`, background:theme , color:text}} className="parent">
                 <ProductView key={i} item={item} />
               </div>
             );

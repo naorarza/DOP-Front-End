@@ -3,10 +3,10 @@ import AntdSwitch from "./antdSwitch";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { MAIN_ROUTE } from "../../constant/urls";
-import { apiPut } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { API_KEY } from "../../constant/constants";
 import axios from "axios";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export default function Settings() {
   const { mutate , darkMode , text , theme} = useContext(AuthContext);
@@ -48,7 +48,7 @@ export default function Settings() {
 
   return (
     <div style={{  transition: '0.3s ease-out', minHeight: "95vh", background: theme , color: text}}>
-      <h2 className="text-center display-4 p-3">פרופיל</h2>
+      <h2 className="text-center display-4 p-3"> פרופיל | הגדרות <SettingsIcon fontSize="inherit"/></h2>
       <hr style={{color: text}} />
       <div className="fs-5 d-flex justify-content-center pb-5">
         <div className="p-5 center border border-2 border-info rounded-3">
