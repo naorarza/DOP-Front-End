@@ -10,11 +10,12 @@ import UserTableAnt from "./components/userTableAnt";
 import { ConfigProvider } from "antd";
 import "./components/userLists.css";
 import AuthAdminComp from "../authAdminComp";
+import Loading from "../../components/loading/loading";
 
 export default function UserList() {
   const [ar, setAr] = useState([]);
   const [query] = useSearchParams();
-  const { user , theme , text } = useContext(AuthContext);
+  const { user, theme, text } = useContext(AuthContext);
 
   useEffect(() => {
     doApi();
@@ -63,23 +64,29 @@ export default function UserList() {
   };
 
   return (
-    <div style={{ minHeight: "95vh", background: theme, color: text }}>
-      <AuthAdminComp />
-      <h2 className="text-center display-6">טבלת משתמשים</h2>
-      <hr style={{color: text}}/>
-      <div className="d-flex justify-content-center">
-        <div className="col-md-8 p-4 phoneScreen">
-          <ConfigProvider direction="rtl">
-            <UserTableAnt
-              ar={ar}
-              setAr={setAr}
-              fixedDate={fixedDate}
-              doApi={doApi}
-              numRole={numRole}
-            />
-          </ConfigProvider>
+    <>
+      {ar.length > 0 ? (
+        <div style={{ minHeight: "95vh", background: theme, color: text }}>
+          <AuthAdminComp />
+          <h2 className="text-center display-6">טבלת משתמשים</h2>
+          <hr style={{ color: text }} />
+          <div className="d-flex justify-content-center">
+            <div className="col-md-8 p-4 phoneScreen">
+              <ConfigProvider direction="rtl">
+                <UserTableAnt
+                  ar={ar}
+                  setAr={setAr}
+                  fixedDate={fixedDate}
+                  doApi={doApi}
+                  numRole={numRole}
+                />
+              </ConfigProvider>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }

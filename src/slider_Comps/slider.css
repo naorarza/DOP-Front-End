@@ -1,54 +1,10 @@
-.slide-item{
-    width: 100%;
-    border-radius: 8px;
-    height: 400px;
-    /* background-color: aqua; */
-    transition: 0.5s ease-in-out;
+
+.productsCarousel {
+  border-left: 2px solid black;
 }
 
-.none{
-    display: none;
+@media screen and (width < 768px) {
+  .productsCarousel {
+    border-left: 0px;
+  }
 }
-
-.slide-item .slide-inner {
-    padding: 0%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.slide-item h3{
-    /* background: #5f9ea0; */
-    color: #ffffff96;
-    font-size: 24px;
-    /* line-height: 100px; */
-    /* margin: 5px; */
-    /* padding: 0%; */
-    position: relative;
-    text-align: center;
-}
-
-
-.slide-item .slide-inner img{
-    width: 80%;
-    height: 70%;
-    border-radius: 2px;
-}
-
-.slick-center div .slide-item .none{
-    display: block;
-}
-
-.slick-center div .slide-item{
-    background-color: #3d3d3dbe;
-    border-radius: 8px;
-}
-
-@media screen and (width < 888px) {
-    .slide-item{
-        height: 250px;
-    }
-}
-

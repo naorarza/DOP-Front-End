@@ -13,6 +13,7 @@ import SortByOption from "./sortByOption";
 import { BiPlusCircle } from "react-icons/bi";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import Loading from "../../components/loading/loading";
 
 export default function AdminProductList() {
   const [ar, setAr] = useState();
@@ -58,52 +59,54 @@ export default function AdminProductList() {
   };
 
   return (
-    <div style={{ minHeight: "95vh", background: theme, color: text }}>
-      <AuthAdminComp />
-      <h2 className="text-center display-4">עריכת תפריט ומוצרים</h2>
-      <div className="d-flex  justify-content-around">
-        <div className="d-flex align-items-center">
-          <Link
-            style={{ textDecoration: "none", marginLeft: "8px" }}
-            to="/admin/products/upload-product"
-          >
-            {/* <Button color="info" variant="contained">
+    <>
+      {filteredProducts != null ? (
+        <div style={{ minHeight: "95vh", background: theme, color: text }}>
+          <AuthAdminComp />
+          <h2 className="text-center display-4">עריכת תפריט ומוצרים</h2>
+          <div className="d-flex  justify-content-around">
+            <div className="d-flex align-items-center">
+              <Link
+                style={{ textDecoration: "none", marginLeft: "8px" }}
+                to="/admin/products/upload-product"
+              >
+                {/* <Button color="info" variant="contained">
           הוספת מוצר
         </Button> */}
-            <Tooltip title="הוסף מוצר">
-              <IconButton color="primary" aria-label="הוסף מוצר">
-                <BiPlusCircle />
-              </IconButton>
-            </Tooltip>
-          </Link>
-          <SearchProduct onSearch={handleSearch} />
-        </div>
-        <SortByOption setFilteredProducts={setFilteredProducts} ar={ar} />
-      </div>
-      <hr />
+                <Tooltip title="הוסף מוצר">
+                  <IconButton color="primary" aria-label="הוסף מוצר">
+                    <BiPlusCircle />
+                  </IconButton>
+                </Tooltip>
+              </Link>
+              <SearchProduct onSearch={handleSearch} />
+            </div>
+            <SortByOption setFilteredProducts={setFilteredProducts} ar={ar} />
+          </div>
+          <hr />
 
-      <div style={{ minHeight: "95vh" }} className="container-fluid pb-3">
-        <div
-          style={{ minHeight: "95vh" }}
-          className="d-flex flex-wrap justify-content-center"
-        >
-          {filteredProducts != null ? (
-            filteredProducts.map((item, i) => {
-              return (
-                <div key={item._id}>
-                <ProductViewAdmin
-                  catAr={catAr}
-                  item={item}
-                  refresh={doApi}
-                />
-                </div>
-              );
-            })
-          ) : (
-            <h2>Loading..</h2>
-          )}
+          <div style={{ minHeight: "95vh" }} className="container-fluid pb-3">
+            <div
+              style={{ minHeight: "95vh" }}
+              className="d-flex flex-wrap justify-content-center"
+            >
+              {filteredProducts.map((item, i) => {
+                return (
+                  <div key={item._id}>
+                    <ProductViewAdmin
+                      catAr={catAr}
+                      item={item}
+                      refresh={doApi}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }

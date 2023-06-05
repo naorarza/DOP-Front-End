@@ -9,11 +9,12 @@ import AuthContext from "../../context/AuthContext";
 import UserTableAnt from "./components/ordersTableAnt";
 import { ConfigProvider } from "antd";
 import AuthAdminComp from "../authAdminComp";
+import Loading from "../../components/loading/loading";
 
 export default function OrdersList() {
   const [ordersAr, setOrdersAr] = useState([]);
   const [query] = useSearchParams();
-  const { user , theme , text } = useContext(AuthContext);
+  const { user, theme, text } = useContext(AuthContext);
 
   useEffect(() => {}, [query]);
 
@@ -59,21 +60,27 @@ export default function OrdersList() {
   };
 
   return (
-    <div style={{ minHeight: "95vh", background: theme, color: text }}>
-      <AuthAdminComp />
-      <h2 className="text-center display-6">ניהול הזמנות</h2>
-      <hr style={{color: text}}/>
-      <div className="d-flex justify-content-center p-4">
-        <ConfigProvider direction="rtl">
-          <UserTableAnt
-            doApiOrders={doApiOrders}
-            ordersAr={ordersAr}
-            setOrdersAr={setOrdersAr}
-            fixedDate={fixedDate}
-            numRole={numRole}
-          />
-        </ConfigProvider>
-      </div>
-    </div>
+    <>
+      {ordersAr.length > 0 ? (
+        <div style={{ minHeight: "95vh", background: theme, color: text }}>
+          <AuthAdminComp />
+          <h2 className="text-center display-6">ניהול הזמנות</h2>
+          <hr style={{ color: text }} />
+          <div className="d-flex justify-content-center p-4">
+            <ConfigProvider direction="rtl">
+              <UserTableAnt
+                doApiOrders={doApiOrders}
+                ordersAr={ordersAr}
+                setOrdersAr={setOrdersAr}
+                fixedDate={fixedDate}
+                numRole={numRole}
+              />
+            </ConfigProvider>
+          </div>
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
