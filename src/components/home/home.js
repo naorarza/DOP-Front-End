@@ -2,9 +2,9 @@ import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import UploadWidget from "../profile_comps/uploadWidget";
 import "./home.css";
-import { CenterMode } from "../../slider_Comps/centerMode";
+import CarouselComponent from "../../slider_Comps/carouselComponent";
+import '../../slider_Comps/slider.css';
 
 export default function Home() {
   const nav = useNavigate();
@@ -13,7 +13,10 @@ export default function Home() {
     <>
       <div id="mainDiv" style={{background:theme , color:text , minHeight: "95vh" }}>
         <div id="image1"></div>
-        <CenterMode />
+        {/* <CenterMode /> */}
+        <div style={{color:text}} className="col-lg-5 col-md-6 col-sm-12">
+        <CarouselComponent/>
+        </div>
         <div
         style={{textShadow:'3px 2px 3px rgba(255,255,255,.2)',fontSize:'1.3em'}} 
           id="image2"

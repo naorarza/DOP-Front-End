@@ -10,7 +10,7 @@ export default function Events() {
     <div className="events" style={{ minHeight: "95vh", color:"#fff" }}>
         <h1 className="text-center p-4">בחירת אירוע לביצוע בבר</h1>
         <hr style={{color:"#fff"}} />
-     
+      
     </div>
   );
 }

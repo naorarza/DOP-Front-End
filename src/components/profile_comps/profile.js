@@ -7,6 +7,7 @@ import AuthContext from "../../context/AuthContext";
 import DataBox from "./dataBox";
 import { toast } from "react-toastify";
 import { API_KEY } from "../../constant/constants";
+import Loading from "../loading/loading";
 
 export default function Profile() {
   const { user , theme , text } = useContext(AuthContext);
@@ -21,11 +22,15 @@ export default function Profile() {
   }, [user]);
 
   return (
+    <>
+    {user?._id ? 
     <div style={{ minHeight: "95vh", background: theme, color: text }}>
       <h2 className="text-center display-4 p-3">פרופיל</h2>
       <div className="fs-5 d-flex justify-content-center pb-5">
         <DataBox />
       </div>
     </div>
+    : <Loading/>}
+    </>
   );
 }

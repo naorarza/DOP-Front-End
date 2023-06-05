@@ -9,6 +9,7 @@ import SortByOptionMenu from "./sortByOptionMenu";
 import ProductViewMenu from "./productViewMenu";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import Loading from "../loading/loading";
 
 export default function Menu() {
   const [ar, setAr] = useState();
@@ -39,7 +40,7 @@ export default function Menu() {
   };
 
   return (
-    <div
+    <>{filteredProducts != null ? <div
       style={{ minHeight: "95vh", background: theme, color: text }}
       className="container-fluid"
     >
@@ -50,18 +51,16 @@ export default function Menu() {
       </div>
       <hr style={{color: text}}/>
       <div className="d-flex flex-wrap justify-content-center pb-4">
-        {filteredProducts != null ? (
-          filteredProducts.map((item, i) => {
+         
+          {filteredProducts.map((item, i) => {
             return (
               <div style={{border:`3px solid grey`, background:theme , color:text}} className="parent">
                 <ProductViewMenu key={i} item={item} />
               </div>
             );
-          })
-        ) : (
-          <h2>Loading..</h2>
-        )}
+          })}
       </div>
     </div>
+    : <Loading/> } </>
   );
 }

@@ -10,11 +10,12 @@ import ProductView from "./productView";
 import SortByOptionUsers from "./sortByOptionUsers";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import Loading from "../loading/loading";
 
 export default function Products() {
   const [ar, setAr] = useState();
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { theme , text } = useContext(AuthContext);
+  const { theme, text } = useContext(AuthContext);
 
   useEffect(() => {
     doApi();
@@ -42,29 +43,43 @@ export default function Products() {
   };
 
   return (
-    <div
-      style={{ minHeight: "95vh", background: theme, color: text }}
-      className="check container-fluid"
-    >
-      <h2 className="text-center display-4">מוצרים</h2>
-      <div className="d-flex flex-wrap gap-2 justify-content-around">
-        <SearchProduct onSearch={handleSearch} />
-        <SortByOptionUsers setFilteredProducts={setFilteredProducts} ar={ar} />
-      </div>
-      <hr style={{color: text}}/>
-      <div className="d-flex flex-wrap justify-content-center pb-4">
-        {filteredProducts != null ? (
-          filteredProducts.map((item, i) => {
-            return (
-              <div style={{border:`3px solid grey`, background:theme , color:text}} className="parent">
-                <ProductView key={i} item={item} />
-              </div>
-            );
-          })
-        ) : (
-          <h2>Loading..</h2>
-        )}
-      </div>
-    </div>
+    <>
+      {" "}
+      {filteredProducts !== null ? (
+        <div
+          style={{ minHeight: "95vh", background: theme, color: text }}
+          className="check container-fluid"
+        >
+          <h2 className="text-center display-4">מוצרים</h2>
+          <div className="d-flex flex-wrap gap-2 justify-content-around">
+            <SearchProduct onSearch={handleSearch} />
+            <SortByOptionUsers
+              setFilteredProducts={setFilteredProducts}
+              ar={ar}
+            />
+          </div>
+          <hr style={{ color: text }} />
+          <div className="d-flex flex-wrap justify-content-center pb-4">
+            {filteredProducts.map((item, i) => {
+              return (
+                <div
+                key={i}
+                  style={{
+                    border: `3px solid grey`,
+                    background: theme,
+                    color: text,
+                  }}
+                  className="parent"
+                >
+                  <ProductView key={i} item={item} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }

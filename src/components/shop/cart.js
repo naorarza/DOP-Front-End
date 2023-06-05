@@ -10,9 +10,11 @@ import { MAIN_ROUTE } from "../../constant/urls";
 import { apiGet, doApiDelete } from "../../services/apiServices";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import Loading from "../loading/loading";
 
 export default function Cart() {
-  const { user, refreshCart, productsInCart , theme , text } = useContext(AuthContext);
+  const { user, refreshCart, productsInCart, theme, text } =
+    useContext(AuthContext);
   const [cartAr, setCartAr] = useState([]);
   const nav = useNavigate();
 
@@ -50,7 +52,7 @@ export default function Cart() {
 
   return (
     <>
-      {productsInCart !== 0 && (
+      {productsInCart !== 0 && user?.cart && cartAr.length > 0 ? (
         <div
           className="d-flex justify-content-center row p-0 m-0"
           style={{ minHeight: "95vh", background: theme, color: text }}
@@ -58,47 +60,52 @@ export default function Cart() {
           <div className="d-flex align-items-center justify-content-center">
             <h2 className="text-center display-5">עגלה</h2>
           </div>
-          {user?.cart ? (
-            <>
-              <div style={{ border:`2px solid ${theme === '#262b2f' ? 'white' : 'black'}`}} className="container rounded-2 mb-5col-md-7 col-sm-7">
-                {cartAr.map((item, i) => {
-                  return (
-                    <CartList
-                      doApi={doApi}
-                      setCartAr={setCartAr}
-                      key={i}
-                      product={item}
-                    />
-                  );
-                })}
-                <div className="d-flex align-items-center justify-content-center">
-                  <Button
-                    onClick={doApiDeleteAll}
-                    color="error"
-                    variant="contained"
-                  >
-                    מחק הכל
-                  </Button>
-                </div>
-              </div>
-              <div className="d-flex justify-content-center gap-2">
+          <>
+            <div
+              style={{
+                border: `2px solid ${theme === "#262b2f" ? "white" : "black"}`,
+              }}
+              className="container rounded-2 mb-5col-md-7 col-sm-7"
+            >
+              {cartAr.map((item, i) => {
+                return (
+                  <CartList
+                    doApi={doApi}
+                    setCartAr={setCartAr}
+                    key={i}
+                    product={item}
+                  />
+                );
+              })}
+              <div className="d-flex align-items-center justify-content-center">
                 <Button
-                  style={{ height: "50px" }}
-                  className="m-3 w-25"
+                  onClick={doApiDeleteAll}
+                  color="error"
                   variant="contained"
-                  size="large"
-                  color="success"
-                  onClick={()=>{nav('/payment')}}
                 >
-                  לתשלום
-                  <ShoppingCartCheckout className="me-5" />
+                  מחק הכל
                 </Button>
               </div>
-            </>
-          ) : (
-            <h2>Loading..</h2>
-          )}
+            </div>
+            <div className="d-flex justify-content-center gap-2">
+              <Button
+                style={{ height: "50px" }}
+                className="m-3 w-25"
+                variant="contained"
+                size="large"
+                color="success"
+                onClick={() => {
+                  nav("/payment");
+                }}
+              >
+                לתשלום
+                <ShoppingCartCheckout className="me-5" />
+              </Button>
+            </div>
+          </>
         </div>
+      ) : (
+        <Loading />
       )}
     </>
   );

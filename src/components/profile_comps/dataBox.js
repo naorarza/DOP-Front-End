@@ -2,14 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart } from "@mui/icons-material";
+import { ListAlt, Settings, ShoppingCart } from "@mui/icons-material";
 import UploadImage from "./uploadImage";
 import "./upload.css";
 import ConnectGoogle from "./connectGoogle";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_CLIENT_ID } from "../../constant/urls";
+import { OrderedListOutlined } from "@ant-design/icons";
 
 export default function DataBox() {
   // cart
@@ -20,7 +21,7 @@ export default function DataBox() {
   // :
   // "admin"
 
-  const { user, isAdmin } = useContext(AuthContext);
+  const { user, isAdmin , text } = useContext(AuthContext);
 
   function flipDateOrder(dateString) {
     const [year, month, day] = dateString.split("-");
@@ -32,9 +33,24 @@ export default function DataBox() {
   const [changing, setChanging] = useState();
   return (
     <>
-      {user?.name && (
-        <div style={{'minWidth': '70%'}} className="border p-3 rounded-3 border-info border-2">
-          <h2 className="text-center display-4">מידע משתמש</h2>
+      
+        <div
+          style={{ minWidth: "70%" }}
+          className="border p-3 rounded-3 border-info border-2"
+        >
+            <h2 className="text-center display-4">מידע משתמש</h2>
+            <div className="d-flex justify-content-between p-4">
+            <Tooltip title="מעבר להסטוריית הזמנות">
+              <button style={{border:`2px solid ${text}`}} id="ordersBtn" onClick={()=>{nav('/profile/orders')}}>
+                <ListAlt />
+              </button>
+            </Tooltip>
+            <Tooltip title="מעבר להגדרות פרופיל">
+              <button style={{border:`2px solid ${text}`}} id="settingsBtn" onClick={()=>{nav('/profile/settings')}}>
+                <Settings />
+              </button>
+            </Tooltip>
+            </div>
           <div className="d-flex flex-column justify-content-center text-center align-items-center gap-3">
             {!changing ? (
               <img id="my-avatar" src={user.profile_img} alt="profile_img" />
@@ -47,14 +63,14 @@ export default function DataBox() {
             )}
             <UploadImage setChanging={setChanging} />
           </div>
-      {!user.googleSub && 
-              <div className="d-flex flex-column align-items-start justify-content-start">
+          {!user.googleSub && (
+            <div className="d-flex flex-column align-items-start justify-content-start">
               <p>קישור חשבון הגוגל שלך:</p>
               <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-                <ConnectGoogle/>
+                <ConnectGoogle />
               </GoogleOAuthProvider>
-              </div>
-      }
+            </div>
+          )}
           <hr />
           {isAdmin && (
             <>
@@ -89,7 +105,6 @@ export default function DataBox() {
             </Button>
           </div>
         </div>
-      )}
     </>
   );
 }

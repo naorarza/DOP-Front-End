@@ -8,9 +8,8 @@ import Google from "./google";
 import { GOOGLE_CLIENT_ID } from "../../constant/urls";
 
 export default function LoginForm(props) {
-  // const handleClickOpen = props.handleClickOpen;
-  // const handleClose = props.handleClose;
   const onSubForm = props.onSubForm;
+  const setLoading = props.setLoading;
 
   const {
     register,

@@ -7,6 +7,7 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Space } from "antd";
 import Search from "antd/es/transfer/search";
+import Loading from "../loading/loading";
 
 export default function Gallery() {
   const [ar, setAr] = useState();
@@ -107,7 +108,7 @@ export default function Gallery() {
             {/* <ImageUploader/> */}
           </div>
         ) : (
-          <h2 className="text-center">Loading...</h2>
+          <Loading/>
         )}
       </div>
     </>
