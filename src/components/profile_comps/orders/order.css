@@ -1,0 +1,15 @@
+.rightDiv {
+  background-image: url("../../../../public/images/drinkpointBlack.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+@media screen and (max-width: 768px) {
+  .rightDiv {
+    background: black;
+    min-height: 400px;
+    width: 100%;
+  }
+}

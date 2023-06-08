@@ -1,4 +1,4 @@
-import { AccountBoxOutlined, SettingsSharp } from "@mui/icons-material";
+import { AccountBoxOutlined, ListAlt, SettingsSharp } from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { Dropdown } from "antd";
 import React from "react";
@@ -12,6 +12,14 @@ export default function ProfileBtn() {
       label: (
         <Link className="text-decoration-none" to='/profile/settings'>
            <SettingsSharp/> <span> הגדרות </span>
+        </Link>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Link className="text-decoration-none" to='/profile/orders'>
+           <ListAlt/> <span> היסטוריה </span>
         </Link>
       ),
     },

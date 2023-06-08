@@ -40,7 +40,7 @@ export default function Menu() {
   };
 
   return (
-    <>{filteredProducts != null ? <div
+    <>{ar?.length > 0 ? <div
       style={{ minHeight: "95vh", background: theme, color: text }}
       className="container-fluid"
     >
@@ -61,6 +61,7 @@ export default function Menu() {
           })}
       </div>
     </div>
-    : <Loading/> } </>
+    : <Loading/> } 
+    </>
   );
 }

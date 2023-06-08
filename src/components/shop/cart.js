@@ -19,19 +19,20 @@ export default function Cart() {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (productsInCart < 1) {
-      nav("/");
-      toast.info("העגלה ריקה, עליך לבחור לפחות פריט אחד על מנת לגשת אליה");
+    if(productsInCart > 0){
+      refreshCart();
+      doApi();
     }
-    refreshCart();
-    doApi();
-  }, []);
-
+    }, [productsInCart]);
+  
+  
   const doApi = async () => {
     let url = MAIN_ROUTE + "users/products";
     try {
       const data = await apiGet(url);
       setCartAr(data);
+      console.log(productsInCart);
+      
     } catch (error) {
       console.log(error);
     }
@@ -99,13 +100,15 @@ export default function Cart() {
                 }}
               >
                 לתשלום
-                <ShoppingCartCheckout className="me-5" />
+                <ShoppingCartCheckout />
               </Button>
             </div>
           </>
         </div>
       ) : (
+        <>
         <Loading />
+        </>
       )}
     </>
   );

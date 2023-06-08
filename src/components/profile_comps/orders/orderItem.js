@@ -27,7 +27,7 @@ export default function OrderItem({ item, number }) {
   return (
     <tr className="text-center">
       <th scope="row">({number})</th>
-      <td>{fixedDate(item.order_date)}</td>
+      <td className="displayNone">{fixedDate(item.order_date)}</td>
       <td>
         {price}
       <Tooltip placement="bottom" title={`שנה ערך`}>
@@ -39,7 +39,7 @@ export default function OrderItem({ item, number }) {
         />
         </Tooltip>
       </td>
-      <td>
+      <td >
         <Button
           variant="contained"
           size="small"

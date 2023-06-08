@@ -21,7 +21,7 @@ export default function DataBox() {
   // :
   // "admin"
 
-  const { user, isAdmin , text } = useContext(AuthContext);
+  const { productsInCart , user, isAdmin , text } = useContext(AuthContext);
 
   function flipDateOrder(dateString) {
     const [year, month, day] = dateString.split("-");
@@ -90,6 +90,7 @@ export default function DataBox() {
           <p className="pe-3">
             תאריך הצטרפות: {flipDateOrder(user.date_created.slice(0, 10))}
           </p>
+          {productsInCart > 0 &&
           <div className="d-flex align-items-center justify-content-center">
             <Button
               variant="contained"
@@ -104,6 +105,7 @@ export default function DataBox() {
               <ShoppingCart />
             </Button>
           </div>
+        }
         </div>
     </>
   );

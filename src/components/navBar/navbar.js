@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { SidebarData } from "./sidebarData";
 import "./navbar.css";
@@ -39,7 +39,7 @@ export default function Navbar({ sidebar, setSidebar }) {
 
   const Signout = () => (
     <li className="nav-text">
-      <Link onClick={handleLogout} to={"/"}>
+      <Link className="NavLink" onClick={handleLogout} to={"/"}>
         <LogoutOutlined />
         <span className="me-3">התנתקות</span>
       </Link>
@@ -48,7 +48,7 @@ export default function Navbar({ sidebar, setSidebar }) {
 
   const Login = () => (
     <li className="nav-text">
-      <Link to={"/login"}>
+      <Link className="NavLink" to={"/login"}>
         <BiLogIn />
         <span className="me-3">התחברות/הרשמה</span>
       </Link>
@@ -144,10 +144,10 @@ export default function Navbar({ sidebar, setSidebar }) {
               {SidebarData.map((item, index) => {
                 return (
                   <li key={index} className={item.cName}>
-                    <Link to={item.path}>
+                    <NavLink activeClassName="active" className='NavLink' to={item.path}>
                       {item.icons}
                       <span className="me-3">{item.title}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 );
               })}
@@ -158,10 +158,10 @@ export default function Navbar({ sidebar, setSidebar }) {
                   {AdminSide.map((item, index) => {
                     return (
                       <li key={index} className={item.cName}>
-                        <Link to={item.path}>
+                        <NavLink activeClassName="active" className='NavLink' to={item.path}>
                           {item.icons}
                           <span className="me-3">{item.title}</span>
-                        </Link>
+                        </NavLink>
                       </li>
                     );
                   })}

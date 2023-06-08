@@ -9,11 +9,12 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Loading from "../../loading/loading";
 import OrderItem from "./orderItem";
+import { useNavigate } from "react-router-dom";
+import { API_KEY } from "../../../constant/constants";
 
 export default function History() {
   const { text, theme, user } = useContext(AuthContext);
-  const [ar, setAr] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [ar, setAr] = useState(null);
 
   const getMyOrders = async () => {
     const url = MAIN_ROUTE + "orders/" + user._id;
@@ -22,20 +23,37 @@ export default function History() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log(data);
       setAr(data);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
       toast.warning("משהו השתבש אנא נסה שוב!");
       console.log(error);
     }
   };
 
+  const nav = useNavigate();
+  
+
   useEffect(() => {
+    console.log('works');
+    
+    if (!localStorage[API_KEY]) {
+      nav("/");
+      toast.info("אתה צריך להתחבר לפני שאתה ניגש לאיזור זה!");
+    }
     user !== null && getMyOrders();
   }, [user]);
 
+  useEffect(() => {
+    if(ar!=null && ar.length === 0){
+      nav('/')
+      toast.info('לא קיימות הזמנות קודמות')
+    }
+  }, [ar]);
+
+
   return (
     <>
-      {!loading ? (
+      {ar?.length > 0 ? (
         <div
           style={{
             transition: "0.3s ease-out",

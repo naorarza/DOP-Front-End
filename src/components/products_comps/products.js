@@ -44,8 +44,7 @@ export default function Products() {
 
   return (
     <>
-      {" "}
-      {filteredProducts !== null ? (
+      {ar?.length > 0 ? (
         <div
           style={{ minHeight: "95vh", background: theme, color: text }}
           className="check container-fluid"

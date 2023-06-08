@@ -61,7 +61,9 @@ export default function CartList(props) {
           <div className="d-flex flex-wrap justify-content-between align-items-center">
             <div>
               <img
+              onClick={()=>{nav('/product/'+ product._id)}}
                 style={{
+                  cursor:'pointer',
                   maxWidth: "130px",
                   maxHeight: "130px",
                   minHeight: "130px",

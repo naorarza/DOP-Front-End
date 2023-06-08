@@ -10,6 +10,7 @@ export default function CartShow() {
 
   return (
     <div style={{ position: "relative" }}>
+            {productsInCart > 0 && (
       <Tooltip placement="bottom" title="עגלה">
         <div
           style={{
@@ -19,7 +20,6 @@ export default function CartShow() {
           }}
         >
           <Link to="/cart" style={{ width: "15px" }}>
-            {productsInCart > 0 && (
               <>
                 <div className="justify-content-center circle text-dark text-center d-flex align-items-center pe-1">
                   {productsInCart}
@@ -31,10 +31,10 @@ export default function CartShow() {
                   style={{color:'#fff'}}
                 />
               </>
-            )}
           </Link>
         </div>
       </Tooltip>
+            )}
     </div>
   );
 }
