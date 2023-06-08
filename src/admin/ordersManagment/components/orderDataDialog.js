@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,10 +11,12 @@ import { useEffect } from "react";
 import ViewProduct from "./viewProduct";
 import { toast } from "react-toastify";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import AuthContext from "../../../context/AuthContext";
 
 export default function OrderDataDialog({ fixedDate, item }) {
   const [open, setOpen] = useState(false);
-
+  const { text } = useContext(AuthContext);
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -48,7 +50,8 @@ export default function OrderDataDialog({ fixedDate, item }) {
             return (
               <div
                 key={i}
-                className="border rounded-3 col-md-auto border-light border-1 m-2 p-2"
+                className="rounded-3 col-md-auto m-2 p-2"
+                style={{border:`2px solid ${text}`}}
               >
                 <div key={i}>
                   <p>מוצר: {product.product_name}</p>

@@ -32,9 +32,9 @@ export default function CategoriesList() {
 
   return (
     <>
+          <AuthAdminComp />
       {ar.length > 0 ? (
         <div style={{ minHeight: "95vh", background: theme, color: text }}>
-          <AuthAdminComp />
           <h2 className="text-center display-4">עריכת קטגוריות</h2>
           <hr />
           <div className="d-flex justify-content-center align-items-center">
@@ -54,7 +54,7 @@ export default function CategoriesList() {
             >
               {ar.map((item) => {
                 return (
-                  <div className="catParent">
+                  <div style={{border:`2px solid ${text}` , color:text , background:theme , fontSize:'1.3em'}} className="catParent">
                     {/* style={{color:text,backgroundColor:theme}}  */}
                     <p className="me-2">שם הקטגוריה: {item.name}</p>
                     {/* <p className="ms-2">האם נמצא בתפריט: {product.inMenu}</p> */}

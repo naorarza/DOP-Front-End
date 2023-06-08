@@ -33,6 +33,7 @@ import PaymentPage from "./components/shop/paymentPage";
 import Events from "./components/events/events";
 import History from "./components/profile_comps/orders/history";
 import Loading from "./components/loading/loading";
+import OrderDetails from "./components/profile_comps/orders/orderDetails";
 
 export default function AppRoutes() {
   const { user } = useContext(AuthContext);
@@ -72,7 +73,8 @@ export default function AppRoutes() {
           <Route path="/menu" element={<Menu />} />
           <Route path="/profile/settings" element={<Settings />} />
           <Route path="/profile/orders" element={<History />} />
-          <Route path="/loading" element={<Loading />} />
+          <Route path="/profile/orders/:id" element={<OrderDetails />} />
+          {/* <Route path="/loading" element={<Loading />} /> */}
           {/* block reqular user from entering admin pages */}
           <Route path="/admin/gallery" element={<AdminGallery />} />
           <Route path="/admin/gallery/uploadImage" element={<UploadForm />} />

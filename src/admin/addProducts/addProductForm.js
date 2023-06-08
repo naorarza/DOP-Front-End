@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MAIN_ROUTE } from "../../constant/urls";
 import { toast } from "react-toastify";
@@ -16,6 +16,7 @@ import {
 import AuthAdminComp from "../authAdminComp";
 // import SelectItem from "./selectItem";
 import { useEffect } from "react";
+import AuthContext from "../../context/AuthContext";
 // import { Select } from "antd";
 
 export default function AddProductForm() {
@@ -25,6 +26,7 @@ export default function AddProductForm() {
   const [amount, setAmount] = useState();
   const [selectValue, setSelectValue] = useState("");
   const [checkbox, setCheckBox] = useState(false);
+  const { theme , text } = useContext(AuthContext);
 
   const handleChange = () => {
     setCheckBox((checkbox) => !checkbox);
@@ -83,14 +85,15 @@ export default function AddProductForm() {
   };
 
   return (
-    <div style={{ background: "#333333" }} className="d-flex text-light justify-content-center">
+    <div style={{ background: theme , color:text }} className="d-flex justify-content-center">
       <AuthAdminComp />
       <div
         style={{ minHeight: "95vh" }}
         className="col-md-8 col-sm-8 col-10 d-flex align-items-center justify-content-center"
       >
         <form
-          className="border border-1 border-light rounded-3 p-3 w-100"
+        style={{border:`2px solid ${text}`}}
+          className="rounded-3 p-3 w-100"
           onSubmit={handleSubmit(onSubForm)}
           id="id_form"
         >

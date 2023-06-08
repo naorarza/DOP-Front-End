@@ -1,32 +1,56 @@
 /* footer css */
 
-
 .footerDiv {
-    height: 100px;
+  min-height: 180px;
 }
 
-.footerNav{
-    width: 130px;
-    font-size: 12px;
+.footerNav {
+  width: 130px;
+  font-size: 12px;
 }
 
-.footerNav p{
-    width: 50%;
-    margin-bottom: 4px;
+.footerNav p {
+  width: 50%;
+  margin-bottom: 4px;
 }
 
 .iconFooter {
-    /* height: 50px; */
-    transition: 0.4s ease-in-out;
+  /* height: 50px; */
+  transition: 0.4s ease-in-out;
 }
 
 .iconFooter:hover {
-    transform: scale(1.2)translateY(-7px);
+  transform: scale(1.2) translateY(-7px);
 }
 
-@media screen and (max-width:768px) {
-    .footerIconDad {
-        display: flex;
-        flex-direction: column;
-    }
+.hoverLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: large;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s  ease;
+}
+
+.hoverLink:hover {
+  color: aqua;
+}
+
+.hoverLink::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: gold;
+    transform: scaleX(0);
+    transform-origin: top left;
+    transition: transform 0.3s ease;
+}
+
+.hoverLink:hover::before {
+  transform: scaleX(1);
 }

@@ -65,9 +65,9 @@ export default function UserList() {
 
   return (
     <>
+          <AuthAdminComp />
       {ar.length > 0 ? (
         <div style={{ minHeight: "95vh", background: theme, color: text }}>
-          <AuthAdminComp />
           <h2 className="text-center display-6">טבלת משתמשים</h2>
           <hr style={{ color: text }} />
           <div className="d-flex justify-content-center">

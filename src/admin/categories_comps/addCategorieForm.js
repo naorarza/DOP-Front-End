@@ -4,6 +4,10 @@ import { MAIN_ROUTE } from "../../constant/urls";
 import { apiPost } from "../../services/apiServices";
 import AuthAdminComp from "../authAdminComp";
 import { Button, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 export default function AddCategorieForm() {
   const {
@@ -12,14 +16,20 @@ export default function AddCategorieForm() {
     formState: { errors },
   } = useForm();
 
+  const {theme, text} = useContext(AuthContext)
+
   const onSubForm = (_bodyData) => {
     doApiPost(_bodyData);
   };
+
+  const nav = useNavigate();
 
   const doApiPost = async (_bodyData) => {
     const url = MAIN_ROUTE + "categories";
     try {
       let data = await apiPost(url, _bodyData);
+      nav(-1)
+      toast.success('הקטגוריה התווספה בהצלחה!')
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -27,7 +37,7 @@ export default function AddCategorieForm() {
   };
 
   return (
-    <div style={{ background: "#333333" }} className="text-light d-flex justify-content-center">
+    <div style={{ background: theme , color:text}} className="d-flex justify-content-center">
       <AuthAdminComp />
       <div
         style={{ minHeight: "95vh" }}
@@ -36,7 +46,8 @@ export default function AddCategorieForm() {
         <form
           onSubmit={handleSubmit(onSubForm)}
           id="id_form"
-          className="border border-1 border-light rounded-3 p-3 w-100"
+          style={{border:`2px solid ${text}`}}
+          className=" rounded-3 p-3 w-100"
         >
           <h2 className="text-center">טופס להוספת קטגוריה</h2>
           <hr />
