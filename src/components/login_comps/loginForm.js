@@ -6,7 +6,7 @@ import ForgotPassword from "../forgotpassword/forgotPassword";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Google from "./google";
 import { GOOGLE_CLIENT_ID } from "../../constant/urls";
-
+import { motion } from "framer-motion";
 export default function LoginForm(props) {
   const onSubForm = props.onSubForm;
   const setLoading = props.setLoading;
@@ -18,18 +18,41 @@ export default function LoginForm(props) {
   } = useForm();
 
   return (
-    <div
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.4,
+      }}
       style={{ border: "3px solid #fff", maxWidth: "400px" }}
       className="rounded-3 container"
     >
-      <h2 className="text-center">התחברות</h2>
+      <motion.h2
+        initial={{ opacity: 0, scale: 0.2 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, type: "spring" }}
+        className="text-center"
+      >
+        התחברות
+      </motion.h2>
       <form
         className="container"
         onSubmit={handleSubmit(onSubForm)}
         id="id_form"
       >
-        <label>אימייל:</label>
-        <input
+        <motion.label
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+        >
+          אימייל:
+        </motion.label>
+        <motion.input
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", duration: 1 }}
           {...register("email", {
             required: true,
             pattern: !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -39,8 +62,17 @@ export default function LoginForm(props) {
           placeholder="הכנס אימייל.."
         />
         {errors.email && <div className="text-danger">* הכנס אימייל תקין</div>}
-        <label>סיסמא:</label>
-        <input
+        <motion.label
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+        >
+          סיסמא:
+        </motion.label>
+        <motion.input
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", duration: 1 }}
           {...register("password", { required: true, minLength: 2 })}
           className="form-control"
           type="password"
@@ -49,7 +81,12 @@ export default function LoginForm(props) {
         {errors.password && (
           <div className="text-danger">* הכנס סיסמא תקינה</div>
         )}
-        <div className="d-flex justify-content-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          className="d-flex justify-content-center"
+        >
           <Button
             type="submit"
             variant="contained"
@@ -58,20 +95,30 @@ export default function LoginForm(props) {
           >
             התחבר
           </Button>
-        </div>
-        <div className="d-flex m-3 justify-content-between">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.2 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          className="d-flex m-3 justify-content-between"
+        >
           <ForgotPassword />
           <Link className="text-decoration-none" to="/signup">
             אין לך משתמש?
           </Link>
-        </div>
+        </motion.div>
 
-          <div className="d-flex mb-4 align-items-center justify-content-center">
-        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <Google />
-        </GoogleOAuthProvider>
-        </div>
+        <motion.div
+          initial={{ opacity: 0}}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+          className="d-flex mb-4 align-items-center justify-content-center"
+        >
+          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+            <Google />
+          </GoogleOAuthProvider>
+        </motion.div>
       </form>
-    </div>
+    </motion.div>
   );
 }

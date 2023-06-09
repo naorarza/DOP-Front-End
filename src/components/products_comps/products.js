@@ -11,6 +11,7 @@ import SortByOptionUsers from "./sortByOptionUsers";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Loading from "../loading/loading";
+import { motion } from "framer-motion";
 
 export default function Products() {
   const [ar, setAr] = useState();
@@ -49,20 +50,41 @@ export default function Products() {
           style={{ minHeight: "95vh", background: theme, color: text }}
           className="check container-fluid"
         >
-          <h2 className="text-center display-4">מוצרים</h2>
-          <div className="d-flex flex-wrap gap-2 justify-content-around">
+          <motion.h2
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="text-center display-3"
+          >
+            מוצרים
+          </motion.h2>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="d-flex flex-wrap gap-2 justify-content-around"
+          >
             <SearchProduct onSearch={handleSearch} />
             <SortByOptionUsers
               setFilteredProducts={setFilteredProducts}
               ar={ar}
             />
-          </div>
-          <hr style={{ color: text }} />
+          </motion.div>
+          <motion.hr
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            style={{ color: text }}
+          />
           <div className="d-flex flex-wrap justify-content-center pb-4">
             {filteredProducts.map((item, i) => {
               return (
-                <div
-                key={i}
+                <motion.div
+                  key={i}
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -10, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                   style={{
                     border: `3px solid grey`,
                     background: theme,
@@ -71,7 +93,7 @@ export default function Products() {
                   className="parent"
                 >
                   <ProductView key={i} item={item} />
-                </div>
+                </motion.div>
               );
             })}
           </div>

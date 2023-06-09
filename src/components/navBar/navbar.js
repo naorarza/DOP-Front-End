@@ -19,6 +19,7 @@ import { Tooltip } from "@mui/material";
 import ProfileBtn from "./profileBtn";
 import SignOut from "./signOut";
 import CartShow from "./cartShow";
+import { motion } from "framer-motion";
 
 export default function Navbar({ sidebar, setSidebar }) {
   const { user, isAdmin, handleLogout } = useContext(AuthContext);
@@ -38,25 +39,40 @@ export default function Navbar({ sidebar, setSidebar }) {
   };
 
   const Signout = () => (
-    <li className="nav-text">
+    <motion.li
+      initial={{ x: 150 }}
+      whileInView={{ x: 0 }}
+      transition={{
+        duration: `${times[SidebarData.length - 1]}`,
+      }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="nav-text"
+    >
       <Link className="NavLink" onClick={handleLogout} to={"/"}>
         <LogoutOutlined />
         <span className="me-3">התנתקות</span>
       </Link>
-    </li>
+    </motion.li>
   );
 
   const Login = () => (
-    <li className="nav-text">
+    <motion.li
+    initial={{ x: 150 }}
+    whileInView={{ x: 0 }}
+    transition={{
+      duration: `${times[SidebarData.length - 1]}`,
+    }}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.95 }} className="nav-text">
       <Link className="NavLink" to={"/login"}>
-        <BiLogIn />
+        <LoginOutlined />
         <span className="me-3">התחברות/הרשמה</span>
       </Link>
-    </li>
+    </motion.li>
   );
 
-  useEffect(() => {}, []);
-
+  const times = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2];
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -118,7 +134,12 @@ export default function Navbar({ sidebar, setSidebar }) {
               </li>
               {user?.name ? (
                 <>
-                  <h3 className=" text-center">
+                  <motion.h3
+                    initial={{ scale: 1.3 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                    className=" text-center"
+                  >
                     <Link
                       className="text-decoration-none text-light"
                       to={"/profile"}
@@ -126,10 +147,14 @@ export default function Navbar({ sidebar, setSidebar }) {
                       {user.name}
                       {isAdmin ? <AdminPanelSettings /> : <></>}
                     </Link>
-                  </h3>
+                  </motion.h3>
                   <div className="d-flex justify-content-center align-items-center text-center">
                     <Link className="text-decoration-none " to={"/profile"}>
-                      <img
+                      <motion.img
+                        initial={{ scale: 1.3 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ type: 'spring' , damping:8 }}
+                        className=" text-center"
                         src={user.profile_img}
                         alt="profile_img"
                         id="my-nav-avatar"
@@ -142,13 +167,22 @@ export default function Navbar({ sidebar, setSidebar }) {
               )}
               <hr className="text-light" />
               {SidebarData.map((item, index) => {
+                console.log(times[index]);
                 return (
-                  <li key={index} className={item.cName}>
-                    <NavLink activeClassName="active" className='NavLink' to={item.path}>
+                  <motion.li
+                    initial={{ x: 150 }}
+                    whileInView={{ x: 0 }}
+                    transition={{ duration: `${times[index]}` }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    key={index}
+                    className={item.cName}
+                  >
+                    <NavLink className="NavLink" to={item.path}>
                       {item.icons}
                       <span className="me-3">{item.title}</span>
                     </NavLink>
-                  </li>
+                  </motion.li>
                 );
               })}
               {user ? <Signout /> : <Login />}
@@ -156,13 +190,24 @@ export default function Navbar({ sidebar, setSidebar }) {
                 <>
                   <hr className="text-light" />
                   {AdminSide.map((item, index) => {
+                    console.log(SidebarData.length);
                     return (
-                      <li key={index} className={item.cName}>
-                        <NavLink activeClassName="active" className='NavLink' to={item.path}>
+                      <motion.li
+                        initial={{ x: 150 }}
+                        whileInView={{ x: 0 }}
+                        transition={{
+                          duration: `${times[index + SidebarData.length]}`,
+                        }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        key={index}
+                        className={item.cName}
+                      >
+                        <NavLink className="NavLink" to={item.path}>
                           {item.icons}
                           <span className="me-3">{item.title}</span>
                         </NavLink>
-                      </li>
+                      </motion.li>
                     );
                   })}
                 </>

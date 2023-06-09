@@ -65,7 +65,7 @@ a.NavLink.active {
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
-    transition: 300ms ease-out;
+    transition: 200ms ease-out;
 }
 
 .nav-text .NavLink:hover{

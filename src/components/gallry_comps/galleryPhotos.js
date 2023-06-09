@@ -1,13 +1,21 @@
 import { DownloadOutlined } from "@mui/icons-material";
 import { DialogActions, IconButton, Tooltip } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import ImageDialog from "../imageDialog";
+import { motion } from "framer-motion";
 
 export default function GalleryPhotos(props) {
   const item = props.item;
-
+  const time = props.time;
+  
   return (
-    <div className="text-center">
+    <motion.div
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -10, opacity: 0 }}
+      transition={{ duration: time }}
+      className="text-center"
+    >
       <div className="col-12 position-relative">
         <img
           className="rounded-3 border border-2"
@@ -42,6 +50,6 @@ export default function GalleryPhotos(props) {
           הסר
         </Button>
       </div> */}
-    </div>
+    </motion.div>
   );
 }

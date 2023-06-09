@@ -1,31 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AudioOutlined } from "@ant-design/icons";
 import GalleryPhotos from "./galleryPhotos";
 import { TextField } from "@mui/material";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Space } from "antd";
-import Search from "antd/es/transfer/search";
+import { motion } from "framer-motion";
 import Loading from "../loading/loading";
 
 export default function Gallery() {
   const [ar, setAr] = useState();
+  const time = 0.1;
   const [searchQ, setSearchQ] = useState("pub");
   const { theme, text } = useContext(AuthContext);
 
   useEffect(() => {
     doApi();
   }, [searchQ]);
-
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1677ff",
-      }}
-    />
-  );
 
   const doApi = async () => {
     searchQ === "" && setSearchQ("pub");
@@ -76,31 +66,39 @@ export default function Gallery() {
   return (
     <>
       <div style={{ minHeight: "95vh", background: theme, color: text }}>
-        {/* <Link id="uploadImage" to="/admin/gallery/uploadImage">
-          <AddAPhotoIcon
-            id="uploadImageIcon"
-            style={{ color: "blue", fontSize: "1.5em" }}
-          />
-        </Link> */}
         {ar ? (
           <div className="container">
-            <h2 className="text-center display-3">גלריה</h2>
-            <div className="container d-flex align-items-center">
-                <TextField
-                  style={{ marginRight: "10%" }}
-                  id="demo-helper-text-misaligned"
-                  helperText="חפש תמונה"
-                  type="text"
-                  label="חיפוש"
-                  onChange={translate}
-                />
-            </div>
-            <hr />
+            <motion.h2
+              initial={{ y: 30 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-center display-3"
+            >
+              גלריה
+            </motion.h2>
+            <motion.div
+              initial={{ y: 30 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="container d-flex align-items-center"
+            >
+              <TextField
+                style={{ marginRight: "10%" }}
+                id="demo-helper-text-misaligned"
+                helperText="חפש תמונה"
+                type="text"
+                label="חיפוש"
+                onChange={translate}
+              />
+            </motion.div>
+            <motion.hr initial={{ y: 30 }}
+            animate={{ y:0 }}
+            transition={{duration:.3}} />
             <div className="d-flex gap-5 p-5 flex-wrap justify-content-center ">
               {ar.map((item, i) => {
                 return (
                   <>
-                    <GalleryPhotos key={i} item={item} />
+                    <GalleryPhotos time={time + i / 10} key={i} item={item} />
                   </>
                 );
               })}
@@ -108,7 +106,7 @@ export default function Gallery() {
             {/* <ImageUploader/> */}
           </div>
         ) : (
-          <Loading/>
+          <Loading />
         )}
       </div>
     </>

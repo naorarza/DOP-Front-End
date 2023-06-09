@@ -1,24 +1,72 @@
 import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import AuthContext from "../../context/AuthContext";
 import "./home.css";
 import CarouselComponent from "../../slider_Comps/carouselComponent";
-import '../../slider_Comps/slider.css';
+import "../../slider_Comps/slider.css";
 
 export default function Home() {
-  const nav = useNavigate();
-  const { text , theme } = useContext(AuthContext);
+  const { text, theme } = useContext(AuthContext);
   return (
     <>
-      <div id="mainDiv" style={{background:theme , color:text , minHeight: "95vh" }}>
+      <div
+        id="mainDiv"
+        style={{ background: theme, color: text, minHeight: "95vh" }}
+      >
         <div id="image1"></div>
         {/* <CenterMode /> */}
-        <div style={{color:text}} className="col-lg-5 col-md-6 col-sm-12">
-        <CarouselComponent/>
+        <div className="d-flex align-items-center justify-content-between p-2 flex-wrap">
+          <div style={{ color: text }} className="col-lg-4 col-md-5 col-sm-12">
+            <CarouselComponent />
+          </div>
+          <div className="d-flex col-lg-7 col-md-7 col-sm-12 align-items-center justify-content-between p-2 flex-wrap">
+            <div style={{ color: text }} className="col-lg-5 col-md-5 col-sm-5">
+              <section>
+                <motion.p
+                  initial={{ opacity: 0, y: 150 }}
+                  // animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  // viewport={{ once: true }}
+                >
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Laborum minus obcaecati provident consequatur reprehenderit
+                  cupiditate, blanditiis ab sit a voluptatibus corporis ipsa
+                  accusantium iure vitae dolor iusto culpa sunt maiores. Fuga
+                  cum sed expedita beatae dolor. Porro doloribus quibusdam amet
+                  sed, nam molestiae nihil distinctio consectetur explicabo eos
+                  neque pariatur.
+                </motion.p>
+              </section>
+            </div>
+            <div style={{ color: text }} className="col-lg-5 col-md-5 col-sm-5">
+              <section>
+                <motion.p
+                  initial={{ opacity: 0, y: 150 }}
+                  // animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  // viewport={{ once: true }}
+                >
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Laborum minus obcaecati provident consequatur reprehenderit
+                  cupiditate, blanditiis ab sit a voluptatibus corporis ipsa
+                  accusantium iure vitae dolor iusto culpa sunt maiores. Fuga
+                  cum sed expedita beatae dolor. Porro doloribus quibusdam amet
+                  sed, nam molestiae nihil distinctio consectetur explicabo eos
+                  neque pariatur.
+                </motion.p>
+              </section>
+            </div>
+          </div>
         </div>
         <div
-        style={{textShadow:'3px 2px 3px rgba(255,255,255,.2)',fontSize:'1.3em'}} 
+          style={{
+            textShadow: "3px 2px 3px rgba(255,255,255,.2)",
+            fontSize: "1.3em",
+          }}
           id="image2"
           className="d-flex py-3 px-4 align-items-end justify-content-between "
         >
@@ -58,8 +106,11 @@ export default function Home() {
           <div>
             <h3>יצירת קשר</h3>
             פלאפון: <p className="phoneText">0537201229 / 0536297403</p>
-    
-            <a style={{textShadow:'3px 2px 3px rgba(255,255,255,.2)'}} className="phone" href="tel:0537201229">
+            <a
+              style={{ textShadow: "3px 2px 3px rgba(255,255,255,.2)" }}
+              className="phone"
+              href="tel:0537201229"
+            >
               0537201229
             </a>{" "}
             <span className="phone"> / </span>
