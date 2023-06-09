@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { motion } from 'framer-motion';
 
 const CarouselComponent = () => {
   const [ar, setAr] = useState([]);
@@ -53,7 +54,13 @@ const CarouselComponent = () => {
   const filteredAr = ar.filter((product) => checkIfNewProduct(product));
 
   return (
-    <div className="productsCarousel" style={{ backgroundColor: theme, padding: "32px" }}>
+    <motion.div
+      initial={{ opacity: 0, y: 150 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="productsCarousel"
+      style={{ backgroundColor: theme, padding: "32px" }}
+    >
       <h2 className="text-center pb-2"> מוצרים חדשים</h2>
       <hr />
       <Carousel
@@ -69,13 +76,12 @@ const CarouselComponent = () => {
         duration={500}
         swipe
         navButtonsAlwaysVisible
-
       >
         {filteredAr.map((item, i) => (
           <Item key={i} item={item} />
         ))}
       </Carousel>
-    </div>
+    </motion.div>
   );
 };
 
