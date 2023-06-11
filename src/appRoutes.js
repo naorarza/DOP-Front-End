@@ -32,7 +32,6 @@ import SignUpGoogle from "./components/signup_comps/signUpGoogle";
 import PaymentPage from "./components/shop/paymentPage";
 import Events from "./components/events/events";
 import History from "./components/profile_comps/orders/history";
-import Loading from "./components/loading/loading";
 import OrderDetails from "./components/profile_comps/orders/orderDetails";
 
 export default function AppRoutes() {
@@ -54,6 +53,7 @@ export default function AppRoutes() {
       />
       <div
       style={sidebar ? {opacity:'0.8'} : {opacity:'1'}}
+      className="mainDivAppRoutes"
         onClick={() => {
           setSidebar(false);
         }}

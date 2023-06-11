@@ -133,6 +133,7 @@ const doApiGetValue = async () => {
         setGoogleProfileImg,
         setGoogleSub,
         cartPrice,
+        doApiGetValue,
       }}
     >
       {children}

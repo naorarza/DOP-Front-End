@@ -4,6 +4,7 @@ import { Input, Select, Space, Table, Tag } from "antd";
 import { useRef } from "react";
 import { useState } from "react";
 import "./userLists.css";
+import { motion } from "framer-motion";
 import EditDropDown from "./editDropDown";
 
 export default function OrdersTableAnt({
@@ -218,7 +219,13 @@ export default function OrdersTableAnt({
   const data2 = ordersAr;
 
   return (
-    <div className="col-md-10">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="col-md-10"
+    >
       <Table
         columns={ordersColumns}
         pagination={{
@@ -226,6 +233,6 @@ export default function OrdersTableAnt({
         }}
         dataSource={data2}
       />
-    </div>
+    </motion.div>
   );
 }

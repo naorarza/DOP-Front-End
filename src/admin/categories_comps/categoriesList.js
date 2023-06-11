@@ -10,11 +10,12 @@ import "./category.css";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Loading from "../../components/loading/loading";
+import { motion } from "framer-motion";
 
 export default function CategoriesList() {
   const [ar, setAr] = useState([]);
-
   const { theme, text } = useContext(AuthContext);
+  let time = 0.1
 
   useEffect(() => {
     doApi();
@@ -32,7 +33,7 @@ export default function CategoriesList() {
 
   return (
     <>
-          <AuthAdminComp />
+      <AuthAdminComp />
       {ar.length > 0 ? (
         <div style={{ minHeight: "95vh", background: theme, color: text }}>
           <h2 className="text-center display-4">עריכת קטגוריות</h2>
@@ -52,9 +53,21 @@ export default function CategoriesList() {
               //   style={{ minHeight: "95vh" }}
               className="d-flex flex-wrap justify-content-center"
             >
-              {ar.map((item) => {
+              {ar.map((item,i) => {
                 return (
-                  <div style={{border:`2px solid ${text}` , color:text , background:theme , fontSize:'1.3em'}} className="catParent">
+                  <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: time + i / 10 }}
+                    style={{
+                      border: `2px solid ${text}`,
+                      color: text,
+                      background: theme,
+                      fontSize: "1.3em",
+                    }}
+                    className="catParent"
+                  >
                     {/* style={{color:text,backgroundColor:theme}}  */}
                     <p className="me-2">שם הקטגוריה: {item.name}</p>
                     {/* <p className="ms-2">האם נמצא בתפריט: {product.inMenu}</p> */}
@@ -64,7 +77,7 @@ export default function CategoriesList() {
                       </p>
                     </Tooltip>
                     <p className="me-2">סוג הקטגוריה: {item.type}</p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

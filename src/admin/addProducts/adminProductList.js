@@ -14,13 +14,14 @@ import { BiPlusCircle } from "react-icons/bi";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import Loading from "../../components/loading/loading";
+import { motion } from "framer-motion";
 
 export default function AdminProductList() {
   const [ar, setAr] = useState();
   const [catAr, setCatAr] = useState();
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   const { theme, text } = useContext(AuthContext);
+  let time = 0.1;
 
   useEffect(() => {
     doApi();
@@ -60,12 +61,17 @@ export default function AdminProductList() {
 
   return (
     <>
-          <AuthAdminComp />
+      <AuthAdminComp />
       {catAr?.length > 0 ? (
         <div style={{ minHeight: "95vh", background: theme, color: text }}>
           <h2 className="text-center display-4">עריכת תפריט ומוצרים</h2>
           <div className="d-flex  justify-content-around">
-            <div className="d-flex align-items-center">
+            <motion.div
+              initial={{ y: 30 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="d-flex gap-2 flex-wrap justify-content-around"
+            >
               <Link
                 style={{ textDecoration: "none", marginLeft: "8px" }}
                 to="/admin/products/upload-product"
@@ -80,8 +86,8 @@ export default function AdminProductList() {
                 </Tooltip>
               </Link>
               <SearchProduct onSearch={handleSearch} />
-            </div>
-            <SortByOption setFilteredProducts={setFilteredProducts} ar={ar} />
+              <SortByOption setFilteredProducts={setFilteredProducts} ar={ar} />
+            </motion.div>
           </div>
           <hr />
 
@@ -92,13 +98,19 @@ export default function AdminProductList() {
             >
               {filteredProducts.map((item, i) => {
                 return (
-                  <div key={item._id}>
+                  <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: time + i / 10 }}
+                    key={item._id}
+                  >
                     <ProductViewAdmin
                       catAr={catAr}
                       item={item}
                       refresh={doApi}
                     />
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

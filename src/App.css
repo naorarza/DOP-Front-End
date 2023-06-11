@@ -42,6 +42,9 @@ body{
 .iconFooter:hover {
     transform: scale(1.2)translateY(-7px);
 }
+.mainDivAppRoutes{
+    min-height: 95vh;
+}
 
 /* @media screen and (max-width:768px){
     .footerIconDad{

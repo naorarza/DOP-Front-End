@@ -6,11 +6,12 @@ import { useState } from "react";
 import "./userLists.css";
 import EditDropDown from "./editDropDown";
 import AuthContext from "../../../context/AuthContext";
+import { motion } from "framer-motion";
 
 export default function UserTableAnt({ doApi, ar, setAr, fixedDate, numRole }) {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const {text,theme} = useContext(AuthContext);
+  const { text, theme } = useContext(AuthContext);
   const searchInput = useRef(null);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -217,7 +218,12 @@ export default function UserTableAnt({ doApi, ar, setAr, fixedDate, numRole }) {
     return `${str.slice(0, 3)}-${str.slice(3)}`;
   };
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5}}
+    >
       <Table
         columns={columns}
         pagination={{
@@ -225,6 +231,6 @@ export default function UserTableAnt({ doApi, ar, setAr, fixedDate, numRole }) {
         }}
         dataSource={data}
       />
-    </div>
+    </motion.div>
   );
 }
