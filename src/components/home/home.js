@@ -18,7 +18,7 @@ export default function Home() {
         <div id="image1"></div>
         {/* <CenterMode /> */}
         <div className="d-flex align-items-center justify-content-between p-2 flex-wrap">
-          <div style={{ color: text }} className="col-lg-4 col-md-5 col-sm-12">
+          <div style={{ color: text }} className="downPhone col-lg-4 col-md-5 col-sm-12">
             <CarouselComponent />
           </div>
           <div className="d-flex col-lg-7 col-md-7 col-sm-12 align-items-center justify-content-between p-2 flex-wrap">

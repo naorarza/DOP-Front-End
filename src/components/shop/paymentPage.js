@@ -12,7 +12,7 @@ import "./cart.css";
 import Loading from "../loading/loading";
 
 export default function PaymentPage() {
-  const { theme, text, cartPrice, mutate, refreshCart, productsInCart } =
+  const { theme, text, cartPrice, mutate, doApiGetValue, refreshCart, productsInCart } =
     useContext(AuthContext);
   const [isPresent, setIsPresent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,6 +37,10 @@ export default function PaymentPage() {
       toast.info("העגלה ריקה, עליך לבחור לפחות פריט אחד על מנת לגשת אליה");
     }
   };
+
+  useEffect(() => {
+    doApiGetValue();
+  },[])
 
   useEffect(() => {
     acceptedPayment && doApiPostOrder();

@@ -44,7 +44,13 @@
 
 
 @media screen and (max-width:768px){
-    
+    .downPhone{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+
     .phone{
         display: flex;
     }

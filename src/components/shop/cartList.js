@@ -6,11 +6,15 @@ import { apiPut, doApiDelete } from "../../services/apiServices";
 import { MAIN_ROUTE } from "../../constant/urls";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { Delete } from "@mui/icons-material";
+import { motion } from "framer-motion";
+import DeleteDialog from "./deleteDialog";
 
 export default function CartList(props) {
   const { user, refreshCart, productsInCart } = useContext(AuthContext);
   const product = props.product;
+  const index = props.index;
+  const length = props.length;
   const doApi = props.doApi;
   const nav = useNavigate();
   const [count, setCount] = useState(productsInCart);
@@ -24,18 +28,7 @@ export default function CartList(props) {
     console.log(count);
   }, [count]);
 
-  const deleteProductFromCart = async () => {
-    let url = MAIN_ROUTE + "users/product/delete/" + product._id;
-    try {
-      const data = await doApiDelete(url);
-      doApi();
-      refreshCart();
-      toast.success("המוצר הוסר בהצלחה!");
-      setCount(count - 1);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   const updateProductAmount = async (upOrDown) => {
     if (upOrDown === "down" && product.amount_product === 1) {
@@ -58,12 +51,19 @@ export default function CartList(props) {
     <>
       {user?.cart ? (
         <>
-          <div className="d-flex flex-wrap justify-content-between align-items-center">
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: index / 10 + 0.3 + 0.3 }}
+            className="productInCart"
+          >
             <div>
               <img
-              onClick={()=>{nav('/product/'+ product._id)}}
+                onClick={() => {
+                  nav("/product/" + product._id);
+                }}
                 style={{
-                  cursor:'pointer',
+                  cursor: "pointer",
                   maxWidth: "130px",
                   maxHeight: "130px",
                   minHeight: "130px",
@@ -74,52 +74,49 @@ export default function CartList(props) {
                 title={product.product_name}
               />
             </div>
-            <div>
-              <p>product name: {product.product_name}</p>
+            <div className="fs-5">
+              <p>שם המוצר: {product.product_name}</p>
               <p>
-                product price: {product.product_price * product.amount_product}₪
+                מחיר המוצר: {product.product_price * product.amount_product}₪
               </p>
             </div>
-            <div>
-              <p>product amount: {product.amount_product}</p>
-              <div className="d-flex justify-content-between">
-              {!loading ? 
-              <>
-                <Button
-                  className="ms-2"
-                  variant="contained"
-                  size="small"
-                  color="info"
-                  onClick={() => {
-                    updateProductAmount("up");
-                  }}
-                >
-                  +
-                </Button>
-                <Button
-                  onClick={() => {
-                    updateProductAmount("down");
-                  }}
-                  variant="contained"
-                  size="small"
-                  color="warning"
-                >
-                  -
-                </Button>
-                </>
-               : <CircularProgress/>}
-                <Button
-                  onClick={deleteProductFromCart}
-                  variant="contained"
-                  size="small"
-                  color="error"
-                >
-                  מחק
-                </Button>
+            <div className="littleButton">
+              <p className="text-center fs-5">כמות: {product.amount_product}</p>
+              <div className="d-flex justify-content-between flex-column ms-3">
+                {!loading ? (
+                  <div className="plusMinus">
+                    <Button
+                      className="ms-2"
+                      variant="contained"
+                      size="small"
+                      color="info"
+                      onClick={() => {
+                        updateProductAmount("up");
+                      }}
+                    >
+                      +
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        updateProductAmount("down");
+                      }}
+                      variant="contained"
+                      size="small"
+                      color="warning"
+                    >
+                      -
+                    </Button>
+                  </div>
+                ) : (
+                  <CircularProgress />
+                )}
+                <div className="d-flex align-items-center justify-content-center pt-2">
+                  <DeleteDialog doApi={doApi} setCount={setCount} count={count}  product={product}/>
+                </div>
               </div>
             </div>
-          </div>
-          <hr className="m-1" />
+          </motion.div>
+          {index + 1 < length && <hr className="m-0 p-0" />}
         </>
       ) : (
         <h2>Loading product..</h2>

@@ -1,19 +1,12 @@
 import React from "react";
-import { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
-import { MAIN_ROUTE } from "../../constant/urls";
-import { apiPut } from "../../services/apiServices";
-import { toast } from "react-toastify";
-import { Button, LinearProgress, Tooltip } from "@mui/material";
-import { AddShoppingCartSharp } from "@mui/icons-material";
+import { Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 export default function ProductViewMenu(props) {
   const product = props.item;
-  const { refreshCart } = useContext(AuthContext);
+  // const { refreshCart } = useContext(AuthContext);
   const nav = useNavigate();
-  const [loading,setLoading] = useState(false);
+  // const [loading,setLoading] = useState(false);
 
   return (
     <>

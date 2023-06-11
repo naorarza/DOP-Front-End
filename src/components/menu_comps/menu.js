@@ -16,6 +16,8 @@ export default function Menu() {
   const [ar, setAr] = useState();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { theme, text } = useContext(AuthContext);
+  const time = 0.1;
+
   useEffect(() => {
     doApi();
   }, []);
@@ -77,17 +79,17 @@ export default function Menu() {
             {filteredProducts.map((item, i) => {
               return (
                 <motion.div
-                  key={i}
                   initial={{ y: 50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -10, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: time + i / 10 }}
+                  key={i}
                   style={{
                     border: `3px solid grey`,
                     background: theme,
                     color: text,
                   }}
-                  className="parent"
+                  className="parent text-center"
                 >
                   <ProductViewMenu item={item} />
                 </motion.div>

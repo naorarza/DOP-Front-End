@@ -11,6 +11,8 @@ import { apiGet, doApiDelete } from "../../services/apiServices";
 import { ShoppingCartCheckout } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
+import { motion } from "framer-motion";
+import "./cart.css";
 
 export default function Cart() {
   const { user, refreshCart, productsInCart, theme, text } =
@@ -19,20 +21,18 @@ export default function Cart() {
   const nav = useNavigate();
 
   useEffect(() => {
-    if(productsInCart > 0){
+    if (productsInCart > 0) {
       refreshCart();
       doApi();
     }
-    }, [productsInCart]);
-  
-  
+  }, [productsInCart]);
+
   const doApi = async () => {
     let url = MAIN_ROUTE + "users/products";
     try {
       const data = await apiGet(url);
       setCartAr(data);
       console.log(productsInCart);
-      
     } catch (error) {
       console.log(error);
     }
@@ -52,21 +52,35 @@ export default function Cart() {
   };
 
   return (
-    <>
+    <div
+      className="p-0 m-0"
+      style={{ minHeight: "95vh", background: theme, color: text }}
+    >
       {productsInCart !== 0 && user?.cart && cartAr.length > 0 ? (
         <div
-          className="d-flex justify-content-center row p-0 m-0"
-          style={{ minHeight: "95vh", background: theme, color: text }}
+          className="d-flex justify-content-center flex-column p-0 m-0"
+          style={{ background: theme, color: text }}
         >
           <div className="d-flex align-items-center justify-content-center">
-            <h2 className="text-center display-5">עגלה</h2>
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ y: [-50, 10, 0], opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="text-center display-5 m-4"
+            >
+              עגלה
+            </motion.h2>
           </div>
           <>
-            <div
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2 }}
               style={{
                 border: `2px solid ${theme === "#262b2f" ? "white" : "black"}`,
               }}
-              className="container rounded-2 mb-5col-md-7 col-sm-7"
+              className="changeCart rounded-2"
             >
               {cartAr.map((item, i) => {
                 return (
@@ -74,24 +88,37 @@ export default function Cart() {
                     doApi={doApi}
                     setCartAr={setCartAr}
                     key={i}
+                    index={i}
+                    length={cartAr.length}
                     product={item}
                   />
                 );
               })}
-              <div className="d-flex align-items-center justify-content-center">
-                <Button
-                  onClick={doApiDeleteAll}
-                  color="error"
-                  variant="contained"
-                >
-                  מחק הכל
-                </Button>
-              </div>
+            </motion.div>
             </div>
-            <div className="d-flex justify-content-center gap-2">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7 }}
+              className="deleteAllBtn"
+            >
+              <Button
+                onClick={doApiDeleteAll}
+                color="error"
+                variant="contained"
+              >
+                מחק הכל
+              </Button>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7 }}
+              className="d-flex justify-content-center gap-2"
+            >
               <Button
                 style={{ height: "50px" }}
-                className="m-3 w-25"
+                className="w-25 mt-4"
                 variant="contained"
                 size="large"
                 color="success"
@@ -102,14 +129,14 @@ export default function Cart() {
                 לתשלום
                 <ShoppingCartCheckout />
               </Button>
-            </div>
+            </motion.div>
           </>
         </div>
       ) : (
         <>
-        <Loading />
+          <Loading />
         </>
       )}
-    </>
+    </div>
   );
 }

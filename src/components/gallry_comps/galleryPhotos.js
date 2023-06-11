@@ -1,6 +1,6 @@
 import { DownloadOutlined } from "@mui/icons-material";
 import { DialogActions, IconButton, Tooltip } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import ImageDialog from "../imageDialog";
 import { motion } from "framer-motion";
 
