@@ -13,7 +13,7 @@ export default function Item(props) {
       <Button onClick={() => {
                     nav("/product/" + props.item._id);
                   }}  size="medium"
-                  variant="text"
+                  variant="contained"
                   color="success">צפייה במוצר!</Button>
     </Paper>
   );

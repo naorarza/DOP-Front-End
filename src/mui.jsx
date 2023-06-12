@@ -17,7 +17,7 @@ const ThemeProvider = ({ children }) => {
     },
     // shadows: Array(25).fill('none'),
     typography: {
-      fontFamily: "-apple-system",
+      fontFamily: `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
     },
     components: {
       MuiInputAdornment: {

@@ -3,8 +3,17 @@
   border-left: 2px solid black;
 }
 
-@media screen and (width < 768px) {
+@media screen and (width < 1100px) {
   .productsCarousel {
     border-left: 0px;
+  }
+  .center{
+    width:60%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .center {
+    width: 100%;
   }
 }

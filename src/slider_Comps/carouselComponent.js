@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const CarouselComponent = () => {
   const [ar, setAr] = useState([]);
@@ -54,34 +54,39 @@ const CarouselComponent = () => {
   const filteredAr = ar.filter((product) => checkIfNewProduct(product));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 150 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="productsCarousel"
+    <div
+      className="productsCarousel center"
       style={{ backgroundColor: theme, padding: "32px" }}
     >
       <h2 className="text-center pb-2"> מוצרים חדשים</h2>
       <hr />
-      <Carousel
-        NextIcon={<ArrowBackIosNewOutlined />}
-        PrevIcon={<ArrowForwardIosOutlined />}
-        prev={() => {
-          /* previus product */
-        }}
-        next={() => {
-          /* next product */
-        }}
-        stopAutoPlayOnHover
-        duration={500}
-        swipe
-        navButtonsAlwaysVisible
+      <motion.div
+        initial={{ opacity: 0, y: 150 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        // animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        
       >
-        {filteredAr.map((item, i) => (
-          <Item key={i} item={item} />
-        ))}
-      </Carousel>
-    </motion.div>
+        <Carousel
+          NextIcon={<ArrowBackIosNewOutlined />}
+          PrevIcon={<ArrowForwardIosOutlined />}
+          prev={() => {
+            /* previus product */
+          }}
+          next={() => {
+            /* next product */
+          }}
+          stopAutoPlayOnHover
+          duration={500}
+          swipe
+          navButtonsAlwaysVisible
+        >
+          {filteredAr.map((item, i) => (
+            <Item key={i} item={item} />
+          ))}
+        </Carousel>
+      </motion.div>
+    </div>
   );
 };
 
