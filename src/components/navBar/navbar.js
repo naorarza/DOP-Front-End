@@ -20,6 +20,7 @@ import ProfileBtn from "./profileBtn";
 import SignOut from "./signOut";
 import CartShow from "./cartShow";
 import { motion } from "framer-motion";
+import Home from "./home";
 
 export default function Navbar({ sidebar, setSidebar }) {
   const { user, isAdmin, handleLogout } = useContext(AuthContext);
@@ -82,7 +83,8 @@ export default function Navbar({ sidebar, setSidebar }) {
           </Link>
           {user?.name ? (
             <div onClick={() => setSidebar(false)} className="d-flex">
-              <SignOut />
+              {/* <SignOut /> */}
+              <Home/>
               <ProfileBtn />
               <CartShow />
             </div>
@@ -185,7 +187,7 @@ export default function Navbar({ sidebar, setSidebar }) {
                   </motion.li>
                 );
               })}
-              {user ? <Signout /> : <Login />}
+              {!user ? <Login /> : <Signout/>}
               {isAdmin && user ? (
                 <>
                   <hr className="text-light" />

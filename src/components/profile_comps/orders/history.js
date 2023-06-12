@@ -68,18 +68,18 @@ export default function History() {
           </h2>
           <hr style={{ color: text }} />
           <div className="fs-5 d-flex justify-content-center pb-5">
-            <div className="p-0 center col-8 border border-2 border-info rounded-3">
+            <div className="p-0 center fixWidth border border-2 border-info rounded-3">
               <table
                 className="table rounded-3"
                 style={{ color: text, background: theme }}
               >
-                <caption className="text-center">רשימת הזמנות</caption>
+                <caption style={{color:text}} className="text-center pb-0">רשימת הזמנות</caption>
                 <thead>
                   <tr className="text-center">
                     <th scope="col">#</th>
                     <th scope="col">תאריך הזמנה</th>
-                    <th scope="col">סכום תשלום</th>
-                    <th scope="col">צפייה בהזמנה</th>
+                    <th className="disappear" scope="col">סכום תשלום</th>
+                    {/* <th scope="col">צפייה בהזמנה</th> */}
                   </tr>
                 </thead>
                 <tbody>

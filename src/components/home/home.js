@@ -15,13 +15,54 @@ export default function Home() {
         id="mainDiv"
         style={{ background: theme, color: text, minHeight: "95vh" }}
       >
-        <div id="image1"></div>
+        <div className="d-flex align-items-center" id="image1">
+          <motion.div
+            initial={{ y: -150, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.3 }}
+            className="landingHome"
+          >
+            <motion.div
+              whileHover={{ scale: 1.2 }}
+              transition={{ duration: 0.2 }}
+              style={{ margin: 30 }}
+              className="logo"
+            ></motion.div>
+            <div className="moveText" style={{ margin: 30, direction: "ltr" }}>
+              <p
+                style={{ color: "rgba(226,226,226)", fontWeight: "bolder" }}
+                className="p-0 m-0 display-3"
+              >
+                We make
+              </p>
+              <p
+                style={{ color: "rgba(181,74,74)", fontWeight: "bolder" }}
+                className="p-0 m-0 display-3"
+              >
+                an exellent
+              </p>
+              <p
+                style={{ color: "rgba(142,129,109)", fontWeight: "bolder" }}
+                className="p-0 m-0 display-3"
+              >
+                drinks
+              </p>
+            </div>
+          </motion.div>
+        </div>
         {/* <CenterMode /> */}
         <div className="d-flex align-items-center justify-content-between p-2 flex-wrap">
-          <div style={{ color: text }} className="downPhone col-lg-4 col-md-5 col-sm-12">
+          <div
+            style={{ color: text }}
+            id="first_div"
+            className="downPhone col-lg-4 col-md-5 col-sm-12"
+          >
             <CarouselComponent />
           </div>
-          <div className="d-flex col-lg-7 col-md-7 col-sm-12 align-items-center justify-content-between p-2 flex-wrap">
+          <div
+            id="second_div"
+            className="d-flex col-lg-7 col-md-7 col-sm-12 align-items-center justify-content-between p-2 flex-wrap"
+          >
             <div style={{ color: text }} className="col-lg-5 col-md-5 col-sm-5">
               <section>
                 <motion.p

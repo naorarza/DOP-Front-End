@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useNavigate } from "react-router-dom";
+import "./order.css";
 
 export default function OrderItem({ item, number }) {
   const nav = useNavigate();
@@ -27,19 +28,9 @@ export default function OrderItem({ item, number }) {
   return (
     <tr className="text-center">
       <th scope="row">({number})</th>
-      <td className="displayNone">{fixedDate(item.order_date)}</td>
-      <td>
-        {price}
-      <Tooltip placement="bottom" title={`שנה ערך`}>
-        <ChangeCircleIcon
-          style={{ cursor: "pointer", marginRight: 5 }}
-          onClick={() => {
-            changePrice();
-          }}
-        />
-        </Tooltip>
-      </td>
-      <td >
+      <td className="displayNone">
+        {fixedDate(item.order_date)}
+        <br />
         <Button
           variant="contained"
           size="small"
@@ -51,6 +42,21 @@ export default function OrderItem({ item, number }) {
           מעבר לפרטי הזמנה
         </Button>
       </td>
+
+      <td className="disappear">
+        {price}
+        <Tooltip placement="bottom" title={`שנה ערך`}>
+          <ChangeCircleIcon
+            style={{ cursor: "pointer", marginRight: 5 }}
+            onClick={() => {
+              changePrice();
+            }}
+          />
+        </Tooltip>
+      </td>
+      {/* <td >
+        
+      </td> */}
     </tr>
   );
 }

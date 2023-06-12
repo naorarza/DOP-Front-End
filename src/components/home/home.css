@@ -1,61 +1,109 @@
 #mainDiv {
-    /* background-image: url(images/wllpaper.jpg);
+  /* background-image: url(images/wllpaper.jpg);
     background-position: center;
     background-size: contain; */
-    background: rgb(49, 49, 49);
-    color: white;
+  background: rgb(49, 49, 49);
+  color: white;
 }
 
-
-
 #image1 {
-    background-image: url(./images/image1.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 93vh;
+  background-image: url(./images/image1.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 93vh;
+}
+
+.logo {
+  /* background-image: url(./images/drinkPointlogo.png); */
+  background-image: url(./images/circleLogo.png);
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  height: 250px;
+  width: 250px;
+}
+
+.landingHome {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100%;
+  min-width: 100%;
 }
 
 #image2 {
-    background-image: url(./images/image2.jpg);
-    background-position: center;
-    background-size: cover;
-
-    min-height: 500px;  
-    /* width: 85%; */
-    margin-inline: auto;
-
-    font-size: 1.2em;
-    /* text-shadow: 2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black, 2px 0px 0 black, 0px 2px 0 black, -2px 0px 0 black, 0px -2px 0 black; */
+  background-image: url(./images/image2.jpg);
+  background-position: center;
+  background-size: cover;
+  min-height: 500px;
+  /* width: 85%; */
+  margin-inline: auto;
+  font-size: 1.2em;
+  /* text-shadow: 2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black, 2px 0px 0 black, 0px 2px 0 black, -2px 0px 0 black, 0px -2px 0 black; */
 }
 
-.phone{
-    display: none;
+.phone {
+  display: none;
 }
 
 #image2 a {
-    transition: 0.5s ease-in-out;
-    text-shadow: none;
-    color: black;
+  transition: 0.5s ease-in-out;
+  text-shadow: none;
+  color: black;
 }
 
 #image2 a:hover {
-    color: aqua;
+  color: aqua;
 }
 
+#first_div {
+  order: 1;
+}
 
-@media screen and (max-width:768px){
-    .downPhone{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-    }
+#second_div {
+  order: 2;
+}
 
-    .phone{
-        display: flex;
-    }
-    
-    .phoneText{
-        display: none;
-    }
+@media screen and (max-width: 1100px) {
+  .downPhone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+  }
+  #first_div {
+    order: 2;
+    border-left: 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #second_div {
+    order: 1;
+    width: 100%;
+  }
+  .phone {
+    display: flex;
+  }
+
+  .phoneText {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .logo {
+    height: 170px;
+    width: 170px;
+  }
+
+  .landingHome {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }

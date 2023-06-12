@@ -1,25 +1,43 @@
-import { AccountBoxOutlined, ListAlt, SettingsSharp } from "@mui/icons-material";
+import {
+  AccountBoxOutlined,
+  ListAlt,
+  LogoutOutlined,
+  SettingsSharp,
+} from "@mui/icons-material";
 import { Tooltip } from "@mui/material";
 import { Dropdown } from "antd";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import './navbar.css';
+import "./navbar.css";
+import AuthContext from "../../context/AuthContext";
 
 export default function ProfileBtn() {
+
+  const { handleLogout } = useContext(AuthContext);
+
+
   const items = [
     {
       key: "1",
       label: (
-        <Link className="text-decoration-none" to='/profile/settings'>
-           <SettingsSharp/> <span> הגדרות </span>
+        <Link className="text-decoration-none" to="/profile/settings">
+          <SettingsSharp /> <span> הגדרות </span>
         </Link>
       ),
     },
     {
       key: "2",
       label: (
-        <Link className="text-decoration-none" to='/profile/orders'>
-           <ListAlt/> <span> היסטוריה </span>
+        <Link className="text-decoration-none" to="/profile/orders">
+          <ListAlt /> <span> היסטוריה </span>
+        </Link>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Link className="text-decoration-none" onClick={handleLogout} to={"/"}>
+          <LogoutOutlined /> <span>התנתקות</span>
         </Link>
       ),
     },
@@ -27,9 +45,9 @@ export default function ProfileBtn() {
   return (
     <div>
       <Dropdown
-      placement="bottom"
+        placement="bottom"
         menu={{
-          items
+          items,
         }}
         className="dropDown"
       >
@@ -47,7 +65,7 @@ export default function ProfileBtn() {
               className="ms-5"
               fontSize="large"
               // color="action"
-              style={{color:'#fff'}}
+              style={{ color: "#fff" }}
             />
           </Link>
         </Tooltip>

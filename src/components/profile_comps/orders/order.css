@@ -6,10 +6,32 @@
   min-height: 90vh;
 }
 
+.fixWidth {
+  width: 40%;
+}
+
 @media screen and (max-width: 768px) {
   .rightDiv {
     background: black;
     min-height: 400px;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .fixWidth {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .fixWidth{
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 522px) {
+  .disappear {
+    display: none;
   }
 }

@@ -4,7 +4,12 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ListAlt, Settings, ShoppingCart } from "@mui/icons-material";
+import {
+  ListAlt,
+  LogoutOutlined,
+  Settings,
+  ShoppingCart,
+} from "@mui/icons-material";
 import UploadImage from "./uploadImage";
 import "./upload.css";
 import ConnectGoogle from "./connectGoogle";
@@ -13,7 +18,8 @@ import { GOOGLE_CLIENT_ID } from "../../constant/urls";
 import { motion } from "framer-motion";
 
 export default function DataBox() {
-  const { productsInCart, user, isAdmin, text } = useContext(AuthContext);
+  const { productsInCart, handleLogout, user, isAdmin, text } =
+    useContext(AuthContext);
 
   function flipDateOrder(dateString) {
     const [year, month, day] = dateString.split("-");
@@ -32,11 +38,7 @@ export default function DataBox() {
         style={{ minWidth: "70%" }}
         className="border p-3 rounded-3 border-info border-2"
       >
-        <h2
-          className="text-center display-4"
-        >
-          מידע משתמש
-        </h2>
+        <h2 className="text-center display-4">מידע משתמש</h2>
         <div className="d-flex justify-content-between p-4">
           <Tooltip title="מעבר להסטוריית הזמנות">
             <button
@@ -92,7 +94,15 @@ export default function DataBox() {
 
         <p className="pe-3">שם: {user.name}</p>
         <p className="pe-3">שם משתמש: {user.username}</p>
-        <p className="pe-3">אימייל: {user.email}</p>
+        <p
+          style={{
+            wordBreak: "break-all",
+            whiteSpace: "normal",
+          }}
+          className="pe-3"
+        >
+          אימייל: {user.email}
+        </p>
         <p className="pe-3">טלפון: {user.phone}</p>
         <p className="pe-3">עיר: {user.city}</p>
         <p className="pe-3">כתובת: {user.address}</p>
@@ -101,20 +111,41 @@ export default function DataBox() {
           תאריך הצטרפות: {flipDateOrder(user.date_created.slice(0, 10))}
         </p>
         {productsInCart > 0 && (
-          <div className="d-flex align-items-center justify-content-center">
-            <Button
-              variant="contained"
-              color="info"
-              size="large"
-              onClick={() => {
-                nav("/cart");
-              }}
-            >
-              <ShoppingCart />
-              עגלה שלך
-              <ShoppingCart />
-            </Button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="d-flex align-items-center p-2 flex-wrap justify-content-around"
+          >
+            <div className="m-2">
+              <Button
+                variant="contained"
+                color="info"
+                size="large"
+                onClick={() => {
+                  nav("/cart");
+                }}
+              >
+                <ShoppingCart />
+                עגלה שלך
+                <ShoppingCart />
+              </Button>
+            </div>
+            <div className="m-2">
+              <Button
+                variant="outlined"
+                color="error"
+                size="large"
+                onClick={() => {
+                  handleLogout();
+                  nav("/");
+                }}
+              >
+                <LogoutOutlined className="ms-2" />
+                התנתקות
+              </Button>
+            </div>
+          </motion.div>
         )}
       </motion.div>
     </>
