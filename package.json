@@ -10,6 +10,7 @@
     "@fontsource/roboto": "^5.0.2",
     "@google-cloud/translate": "^7.2.1",
     "@mui/icons-material": "^5.11.11",
+    "@mui/joy": "^5.0.0-alpha.84",
     "@mui/material": "^5.11.13",
     "@mui/styled-engine-sc": "^5.11.11",
     "@mui/styles": "^5.13.2",
