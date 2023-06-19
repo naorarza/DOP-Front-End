@@ -67,10 +67,10 @@ export default function AppRoutes() {
           <Route path="/login" element={<Login setLogged={setLogged} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/google" element={<SignUpGoogle />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/menu" element={<Menu />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/profile/settings" element={<Settings />} />
           <Route path="/profile/orders" element={<History />} />
           <Route path="/profile/orders/:id" element={<OrderDetails />} />

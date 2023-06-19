@@ -22,6 +22,7 @@ const AuthContext = createContext({
   googleEmail: null,
   googleProfileImg: null,
   googleSub: null,
+  doApiGetValue: async () => {},
   cartPrice: 0,
 });
 
@@ -44,12 +45,13 @@ export const AuthProvider = ({ children }) => {
         console.log(error);
     }
 };
+
 const doApiGetValue = async () => {
   let url = MAIN_ROUTE + "users/products";
   try {
     const data = await apiGet(url);
     const totalPrice = data.reduce((counter, product) => {
-      return counter + product.product_price;
+      return counter + product.product_price * product.amount_product;
     }, 0);
     console.log(totalPrice);
     setCartPrice(`${totalPrice * 0.27402}`.slice(0, 4));

@@ -32,7 +32,7 @@ const CarouselComponent = () => {
   };
 
   const checkIfNewProduct = (product) => {
-    if (!product.newProductDate) {
+    if (!product.newProductDate || product.inMenu) {
       return false;
     }
     // Get the date from the server
