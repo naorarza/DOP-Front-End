@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import DeleteDialog from "./deleteDialog";
 
 export default function CartList(props) {
-  const { user, refreshCart, productsInCart } = useContext(AuthContext);
+  const { user, doApiGetValue ,refreshCart, productsInCart } = useContext(AuthContext);
   const product = props.product;
   const index = props.index;
   const length = props.length;
@@ -41,6 +41,7 @@ export default function CartList(props) {
         console.log(data);
         doApi();
         setLoading(false);
+        doApiGetValue();
       } catch (error) {
         console.log(error);
       }

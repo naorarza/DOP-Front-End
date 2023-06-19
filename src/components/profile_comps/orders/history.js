@@ -11,6 +11,7 @@ import Loading from "../../loading/loading";
 import OrderItem from "./orderItem";
 import { useNavigate } from "react-router-dom";
 import { API_KEY } from "../../../constant/constants";
+import { motion } from "framer-motion";
 
 export default function History() {
   const { text, theme, user } = useContext(AuthContext);
@@ -63,12 +64,15 @@ export default function History() {
           }}
         >
           <h2 className="text-center display-4 p-3">
-            {" "}
             פרופיל | הזמנות <ListAlt fontSize="inherit" />
           </h2>
           <hr style={{ color: text }} />
           <div className="fs-5 d-flex justify-content-center pb-5">
-            <div className="p-0 center fixWidth border border-2 border-info rounded-3">
+            <motion.div
+              initial={{opacity:0 , scale:0.8}}
+              animate={{opacity:1 , scale:1}}
+              transition={{duration:0.5}}
+             className="p-0 center fixWidth border border-2 border-info rounded-3">
               <table
                 className="table rounded-3"
                 style={{ color: text, background: theme }}
@@ -92,7 +96,7 @@ export default function History() {
                   )}
                 </tbody>
               </table>
-            </div>
+            </motion.div>
           </div>
         </div>
       ) : (

@@ -5,6 +5,14 @@
     background-size: cover;
     
 }
+
+@media screen and (max-width: 1133px) {
+    .rightDiv {
+      background: black;
+      min-height: 400px;
+      width: 100%;
+    }
+  }
 /* .events{
     background-image: url('../../../public/images/drinkPointEventsImage.jpg');
     background-position: center;

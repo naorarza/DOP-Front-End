@@ -12,7 +12,7 @@ import { useState } from "react";
 
 export default function ProductView(props) {
   const product = props.item;
-  const { refreshCart } = useContext(AuthContext);
+  const { refreshCart, user } = useContext(AuthContext);
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -73,17 +73,43 @@ export default function ProductView(props) {
         </Tooltip>
       </p>
       <p className="me-2">מחיר: {product.product_price}₪</p>
-      <Button onClick={addToCart} color="info" variant="contained">
-        {!loading ? (
-          <>
-            הוסף לעגלה <AddShoppingCartSharp className="me-3" />{" "}
-          </>
-        ) : (
-          <p className="w-100 p-2 m-0">
-            <LinearProgress color="secondary" />
+      {user?.name ? (
+        <Button onClick={addToCart} color="info" variant="contained">
+          {!loading ? (
+            <>
+              הוסף לעגלה <AddShoppingCartSharp className="me-3" />{" "}
+            </>
+          ) : (
+            <p className="w-100 p-2 m-0">
+              <LinearProgress color="secondary" />
+            </p>
+          )}
+        </Button>
+      ) : (
+        <>
+          <p
+            className="m-2"
+            style={{
+              color: "grey",
+              wordBreak: "break-word",
+              borderTop: "1px solid black",
+            }}
+          >
+            על מנת להוסיף את המוצר לעגלה עליך להתחבר
           </p>
-        )}
-      </Button>
+          <Button disabled onClick={addToCart} color="info" variant="contained">
+            {!loading ? (
+              <>
+                הוסף לעגלה <AddShoppingCartSharp className="me-3" />{" "}
+              </>
+            ) : (
+              <p className="w-100 p-2 m-0">
+                <LinearProgress color="secondary" />
+              </p>
+            )}
+          </Button>
+        </>
+      )}
     </>
   );
 }

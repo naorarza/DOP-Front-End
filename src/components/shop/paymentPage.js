@@ -10,12 +10,22 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./cart.css";
 import Loading from "../loading/loading";
+import { motion } from "framer-motion";
 
 export default function PaymentPage() {
-  const { theme, text, cartPrice, mutate, doApiGetValue, refreshCart, productsInCart } =
-    useContext(AuthContext);
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const {
+    theme,
+    text,
+    cartPrice,
+    mutate,
+    doApiGetValue,
+    refreshCart,
+    productsInCart,
+  } = useContext(AuthContext);
   const [isPresent, setIsPresent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [checkbox, setCheckBox] = useState(false);
   const [sendingData, setSendingData] = useState({
     isPresent: isPresent,
     order_price: cartPrice,
@@ -40,7 +50,7 @@ export default function PaymentPage() {
 
   useEffect(() => {
     doApiGetValue();
-  },[])
+  }, []);
 
   useEffect(() => {
     acceptedPayment && doApiPostOrder();
@@ -78,7 +88,10 @@ export default function PaymentPage() {
     mutate();
     nav("/");
   };
-
+  const handleChange = () => {
+    setCheckBox((checkbox) => !checkbox);
+    console.log(checkbox);
+  };
   return (
     <>
       {cartPrice > 0 ? (
@@ -86,25 +99,24 @@ export default function PaymentPage() {
           className=""
           style={{
             minHeight: "95vh",
-            background: theme !== "#fff" ? "#262b2f" : "#fff",
-            color: text !== "#fff" ? "#262b2f" : "#fff",
+            background: "#fff",
+            color: "#262b2f",
           }}
         >
           <h2 className="text-center p-4">תשלום וסיום רכישה</h2>
-          <hr
-            style={{ color: text !== "#fff" ? "#262b2f" : "#fff" }}
-            className="pb-4"
-          />
+          <hr style={{ color: "#262b2f" }} className="pb-4" />
           <div
             style={{
               minHeight: "450px",
-              background: theme !== "#fff" ? "#262b2f" : "#fff",
-              border: `2px solid ${theme !== "#262b2f" ? "#fff" : "#262b2f"}`,
+              background: "#fff",
             }}
             className="container justify-content-between flex-column d-flex align-items-center rounded-2"
           >
-            <form
-              style={{border:`2px solid ${text}`, borderRadius:'8px'}}
+            <motion.form
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+              style={{ border: `2px solid ${"#262b2f"}`, borderRadius: "8px" }}
               className="p-4"
               onSubmit={handleSubmit(onSubForm)}
               id="id_form"
@@ -162,40 +174,81 @@ export default function PaymentPage() {
               <br />
               <div className="d-flex align-items-center justify-content-center">
                 <Button type="submit" variant="contained" color="success">
-                  אישור
+                  שמירת הפרטים
                 </Button>
               </div>
-            </form>
+            </motion.form>
           </div>
           <div className="text-center d-flex pt-5 flex-column justify-content-center align-items-center">
+            <div className="mb-3 w-100 d-flex align-items-center justify-content-center">
+              <Checkbox
+                type="checkbox"
+                onClick={handleChange}
+                {...label}
+                {...register("inMenu", { type: "boolean" })}
+              />
+              <label className="pe-2">
+                האם אתה מאשר שאתה בן 18+ (ללא תעודת זהות לא תוכל לקחת את
+                המשלוח)?
+              </label>
+            </div>
             {loading || Number(cartPrice) > 1.5 ? (
-              <PayPalScriptProvider
-                options={{
-                  "client-id":
-                    "AQ_P5k_n2Wq-RUy-b6LelJboRWleBXQAX3rKVKGWycG-wwCYSaHyAOxky5MkWMuPT-nAFhnctDNCise7",
-                }}
-                style={{ width: "250px" }}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
               >
-                <PayPalButtons
-                  createOrder={(data, actions) => {
-                    return actions.order.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            value: cartPrice,
-                          },
-                        },
-                      ],
-                    });
+                <PayPalScriptProvider
+                  options={{
+                    "client-id":
+                      "AQ_P5k_n2Wq-RUy-b6LelJboRWleBXQAX3rKVKGWycG-wwCYSaHyAOxky5MkWMuPT-nAFhnctDNCise7",
                   }}
-                  onApprove={(data, actions) => {
-                    return actions.order.capture().then(function (details) {
-                      onAcceptPaypal(details);
-                    });
-                  }}
-                  style={{ color: "blue", label: "checkout" }}
-                />
-              </PayPalScriptProvider>
+                  style={{ width: "250px" }}
+                >
+                  {checkbox ? (
+                    <PayPalButtons
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: cartPrice,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then(function (details) {
+                          onAcceptPaypal(details);
+                        });
+                      }}
+                      style={{ color: "blue", label: "checkout" }}
+                    />
+                  ) : (
+                    <PayPalButtons
+                      disabled
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: cartPrice,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={(data, actions) => {
+                        return actions.order.capture().then(function (details) {
+                          onAcceptPaypal(details);
+                        });
+                      }}
+                      style={{ color: "blue", label: "checkout" }}
+                    />
+                  )}
+                </PayPalScriptProvider>
+              </motion.div>
             ) : (
               <Box sx={{ display: "flex" }}>
                 <CircularProgress />

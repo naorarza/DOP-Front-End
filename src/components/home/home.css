@@ -44,12 +44,17 @@
 
 .phone {
   display: none;
+  text-decoration: none;
 }
 
 #image2 a {
   transition: 0.5s ease-in-out;
   text-shadow: none;
-  color: black;
+  color: blue;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 #image2 a:hover {
@@ -94,16 +99,29 @@
   }
 }
 
+.line{
+  display:none;
+}
+
 @media screen and (max-width: 660px) {
   .logo {
     height: 170px;
     width: 170px;
   }
-
+  
   .landingHome {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .imageTwo{
+    justify-content: center;
+  }
+  .line{
+    display:flex;
   }
 }

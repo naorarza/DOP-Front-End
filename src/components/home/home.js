@@ -105,34 +105,25 @@ export default function Home() {
         </div>
         <div
           style={{
+            color: "#fff",
             textShadow: "3px 2px 3px rgba(255,255,255,.2)",
             fontSize: "1.3em",
           }}
           id="image2"
-          className="d-flex py-3 px-4 align-items-end justify-content-between "
+          className="d-flex imageTwo flex-wrap py-3 px-4 align-items-end justify-content-lg-between justify-content-md-around justify-content-sm-center text-center "
         >
-          <div id="openTime" className="">
-            <div>
-              <h3 className="px-2">זמני פתיחה</h3>
-              <p>
-                ראשון: 18:00 - 01:00
-                <br />
-                שני: 18:00 - 01:00
-                <br />
-                שלישי: 18:00 - 01:00
-                <br />
-                רביעי: 18:00 - 01:00
-                <br />
-                חמישי: 18:00 - 01:00
-                <br />
-                שישי: 18:00 - 01:00
-                <br />
-                שבת: 18:00 - 01:00
-              </p>
-            </div>
+          <div className="d-flex flex-column align-items-center justify-content-center col-lg-3 col-md-8 col-sm-8 col-8">
+            <h3 className="px-2">זמני פתיחה</h3>
+            <p> ראשון: 18:00 - 01:00</p>
+            <p>שני: 18:00 - 01:00</p>
+            <p>שלישי: 18:00 - 01:00</p>
+            <p>רביעי: 18:00 - 01:00</p>
+            <p>חמישי: 18:00 - 01:00</p>
+            <p>שישי: 18:00 - 01:00</p>
+            <p>שבת: 18:00 - 01:00</p>
           </div>
-
-          <div>
+          <hr style={{ width: "100%", color: "greenyellow" }} className="line" />
+          <div className="col-lg-3 col-md-5 col-sm-8 col-8">
             <h3>מיקום</h3>
             כתובת: אלנבי 143 תל-אביב
             <br />
@@ -143,8 +134,9 @@ export default function Home() {
               דרכי הגעה
             </a>
           </div>
+          <hr style={{ width: "100%", color: "greenyellow" }} className="line" />
 
-          <div>
+          <div className="col-lg-3 col-md-5 col-sm-8 col-8">
             <h3>יצירת קשר</h3>
             פלאפון: <p className="phoneText">0537201229 / 0536297403</p>
             <a
@@ -153,8 +145,7 @@ export default function Home() {
               href="tel:0537201229"
             >
               0537201229
-            </a>{" "}
-            <span className="phone"> / </span>
+            </a>
             <a className="phone" href="tel:0536297403">
               0536297403
             </a>

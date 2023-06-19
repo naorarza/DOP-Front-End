@@ -9,12 +9,13 @@ import { toast } from "react-toastify";
 import { Button, LinearProgress } from "@mui/material";
 import { AddShoppingCartSharp } from "@mui/icons-material";
 import Loading from "../loading/loading";
+import { motion } from "framer-motion";
 
 export default function ProductPage() {
   let params = useParams();
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState();
-  const { refreshCart, theme, text } = useContext(AuthContext);
+  const { refreshCart, user , theme, text } = useContext(AuthContext);
 
   useEffect(() => {
     findProduct();
@@ -69,7 +70,10 @@ export default function ProductPage() {
               style={{ minHeight: "55vh" }}
               className="text-dark d-flex justify-content-center align-items-center"
             >
-              <div
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
                 className="m-3 rounded-2 p-3 container"
                 style={{
                   background: "#eff",
@@ -110,19 +114,25 @@ export default function ProductPage() {
                 <hr className="p-0 mt-4 m-0" />
                 <div className="p-3 fs-5 d-flex justify-content-around flex-wrap">
                   <p>מידע אודות המוצר: {product.info}</p>
-                  <Button onClick={addToCart} color="info" variant="contained">
-                    {!loading ? (
-                      <>
-                        הוסף לעגלה <AddShoppingCartSharp className="me-3" />{" "}
-                      </>
-                    ) : (
-                      <p className="w-100 p-2 m-0">
-                        <LinearProgress color="secondary" />
-                      </p>
-                    )}
-                  </Button>
+                  {!product.inMenu && user?.name ? (
+                    <Button
+                      onClick={addToCart}
+                      color="info"
+                      variant="contained"
+                    >
+                      {!loading ? (
+                        <>
+                          הוסף לעגלה <AddShoppingCartSharp className="me-3" />{" "}
+                        </>
+                      ) : (
+                        <p className="w-100 p-2 m-0">
+                          <LinearProgress color="secondary" />
+                        </p>
+                      )}
+                    </Button>
+                  ) : (<></>)}
                 </div>
-              </div>
+              </motion.div>
             </div>
           )}
         </div>

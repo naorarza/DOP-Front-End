@@ -5,6 +5,7 @@ import { apiGet } from "../../../services/apiServices";
 import AuthContext from "../../../context/AuthContext";
 import ProductList from "./products.js/productlList";
 import "./order.css";
+import { motion } from "framer-motion";
 
 export default function OrderDetails() {
   const { theme, text } = useContext(AuthContext);
@@ -47,11 +48,13 @@ export default function OrderDetails() {
       }}
       className="d-flex flex-wrap justify-content-center"
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
         className="rightDiv d-flex flex-column col-md-6 col-sm-10 align-items-center col-lg-6 text-center"
         style={{
           padding: "6px",
-          // width: "50%",
           boxShadow: "5px 5px 15px 5px #000000",
           color: "white",
         }}
@@ -60,6 +63,9 @@ export default function OrderDetails() {
           <h2>פרטי ההזמנה</h2>
           <hr />
           <h4>שם מבצע ההזמנה: {info.name}</h4>
+          <h4>
+            סטטוס ההזמנה: <span className="text-danger">{info.status}</span>
+          </h4>
           <h4>ההזמנה בוצעה לעיר: {info.city}</h4>
           <h4>ההזמנה בוצעה לכתובת: {info.address}</h4>
           <h4>ההזמנה בוצעה בתאריך: {fixedDate(info.order_date)}</h4>
@@ -68,9 +74,9 @@ export default function OrderDetails() {
           ) : (
             <h4>הזמנה רגילה(לא מתנה)</h4>
           )}
-          {/* {info.delivery_msg.length > 0 && <h4>הודעה לשליח: {info.delivery_msg}</h4>} */}
+          {info.delivery_msg && <h4>הודעה לשליח: {info.delivery_msg}</h4>}
         </div>
-      </div>
+      </motion.div>
       <div className="col-md-6 col-sm-9 col-lg-6" style={{ minHeight: "95vh" }}>
         <ProductList ar={ar} />
       </div>

@@ -15,10 +15,20 @@ import { motion } from "framer-motion";
 import "./cart.css";
 
 export default function Cart() {
-  const { user, refreshCart, productsInCart, theme, text } =
-    useContext(AuthContext);
+
+  const {
+    cartPrice,
+    doApiGetValue,
+    user,
+    refreshCart,
+    productsInCart,
+    theme,
+    text,
+  } = useContext(AuthContext);
+
   const [cartAr, setCartAr] = useState([]);
   const nav = useNavigate();
+  const [number, setNumber] = useState(0);
 
   useEffect(() => {
     if (productsInCart > 0) {
@@ -26,6 +36,14 @@ export default function Cart() {
       doApi();
     }
   }, [productsInCart]);
+
+  useEffect(() => {
+    refreshCart();
+    doApiGetValue();
+    cartPrice > 0 &&
+      setNumber(Math.round(Number(cartPrice / 0.27402).toFixed(2)));
+    console.log("changed");
+  }, [cartPrice]);
 
   const doApi = async () => {
     let url = MAIN_ROUTE + "users/products";
@@ -72,29 +90,31 @@ export default function Cart() {
             </motion.h2>
           </div>
           <>
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              style={{
-                border: `2px solid ${theme === "#262b2f" ? "white" : "black"}`,
-              }}
-              className="changeCart rounded-2"
-            >
-              {cartAr.map((item, i) => {
-                return (
-                  <CartList
-                    doApi={doApi}
-                    setCartAr={setCartAr}
-                    key={i}
-                    index={i}
-                    length={cartAr.length}
-                    product={item}
-                  />
-                );
-              })}
-            </motion.div>
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2 }}
+                style={{
+                  border: `2px solid ${
+                    theme === "#262b2f" ? "white" : "black"
+                  }`,
+                }}
+                className="changeCart rounded-2"
+              >
+                {cartAr.map((item, i) => {
+                  return (
+                    <CartList
+                      doApi={doApi}
+                      setCartAr={setCartAr}
+                      key={i}
+                      index={i}
+                      length={cartAr.length}
+                      product={item}
+                    />
+                  );
+                })}
+              </motion.div>
             </div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -114,11 +134,14 @@ export default function Cart() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7 }}
-              className="d-flex justify-content-center gap-2"
+              className="d-flex flex-column align-items-center justify-content-center"
             >
+              <p style={{ color: text }}>
+                <b> סך הכל לתשלום: {number}₪</b>
+              </p>
               <Button
                 style={{ height: "50px" }}
-                className="w-25 mt-4"
+                className="w-25 mb-3"
                 variant="contained"
                 size="large"
                 color="success"
